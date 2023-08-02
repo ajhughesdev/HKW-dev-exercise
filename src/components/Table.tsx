@@ -42,7 +42,6 @@ const Table = ({
     return sortableItems
   }, [data, sortState])
 
-
   const currentPageData = sortedData.slice(
     currentPage * 15,
     (currentPage + 1) * 15,
@@ -52,7 +51,13 @@ const Table = ({
     <table className='report'>
       <thead>
         <tr>
-          <th className='checkbox'><input type="checkbox" onChange={onSelectAllRows} checked={selectedRows.length === data.length} /></th>
+          <th className='checkbox'>
+            <input
+              type='checkbox'
+              onChange={onSelectAllRows}
+              checked={selectedRows.length === data.length}
+            />
+          </th>
           {Object.entries(columns).map(([key, value]) =>
             !hiddenColumns.includes(key) ? (
               <th
@@ -73,7 +78,13 @@ const Table = ({
       <tbody>
         {currentPageData.map((item) => (
           <tr key={item.customerID}>
-            <td><input type="checkbox" onChange={() => onSelectRow(item.customerID.toString())} checked={selectedRows.includes(item.customerID.toString())} /></td>
+            <td>
+              <input
+                type='checkbox'
+                onChange={() => onSelectRow(item.customerID.toString())}
+                checked={selectedRows.includes(item.customerID.toString())}
+              />
+            </td>
             {Object.entries(columns).map(([key, value]) => {
               if (!hiddenColumns.includes(key)) {
                 if (key === 'clubMember') {

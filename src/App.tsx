@@ -27,35 +27,45 @@ const App = () => {
   const [searchTags, setSearchTags] = useState<string[]>([])
 
   const handleSearch = (searchQuery: string) => {
-    setSearchTags([...searchTags, searchQuery])
-    setFilteredData(
-      data.filter((item) =>
-        Object.values(item).some((value) =>
-          value.toString().toLowerCase().includes(searchQuery.toLowerCase()),
-        ),
-      ),
-    )
+    const trimmedSearchQuery = searchQuery.trim()
+    setSearchTags((prevSearchTags) => {
+      if (prevSearchTags.includes(trimmedSearchQuery)) {
+        // If the search query already exists in the tags, do nothing
+        return prevSearchTags
+      }
+      const newSearchTags = [...prevSearchTags, trimmedSearchQuery]
+      setFilteredData(
+        data.filter((item) =>
+          newSearchTags.some((tag) =>
+            Object.values(item).some((value) =>
+              value.toString().toLowerCase().includes(tag.toLowerCase())
+            )
+          )
+        )
+      )
+      return newSearchTags
+    })
     setCurrentPage(0)
   }
 
-  const handleRemoveSearchTag = (index: number) => {
-    const newSearchTags = [...searchTags]
-    newSearchTags.splice(index, 1)
-    setSearchTags(newSearchTags)
-
-    if (newSearchTags.length > 0) {
-      setFilteredData(
-        data.filter((item) =>
-          newSearchTags.some(tag =>
-            Object.values(item).some(value =>
-              value.toString().toLowerCase().includes(tag.toLowerCase()),
+  const handleRemoveSearchTag = (searchTag: string) => {
+    setSearchTags((prevSearchTags) => {
+      const newSearchTags = prevSearchTags.filter((tag) => tag !== searchTag)
+      if (newSearchTags.length > 0) {
+        setFilteredData(
+          data.filter((item) =>
+            newSearchTags.some((tag) =>
+              Object.values(item).some((value) =>
+                value.toString().toLowerCase().includes(tag.toLowerCase())
+              )
             )
           )
-        ),
-      )
-    } else {
-      setFilteredData(data)
-    }
+        )
+      } else {
+        setFilteredData(data)
+      }
+      return newSearchTags
+    })
   }
 
   const handleToggleColumn = (toggledColumn: string) => {
@@ -109,7 +119,7 @@ const App = () => {
 
   return (
     <div>
-      <SearchBar onSearch={handleSearch} searchTags={searchTags} onRemoveSearchTag={(index: string) => handleRemoveSearchTag(Number(index))} />
+      <SearchBar onSearch={handleSearch} searchTags={searchTags} onRemoveSearchTag={(index: string) => handleRemoveSearchTag(index)} />
       <ColumnToggler
         columns={columns}
         onToggle={handleToggleColumn}
