@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
+import { Columns, DataItem, SortDirection, SortState } from './types'
 import SearchBar from './components/SearchBar'
 import ColumnToggler from './components/ColumnToggler'
 import Table from './components/Table'
 
 import data from './mock_data.json'
-import './App.css'
 
-const columns = {
+const columns: Columns = {
   customerID: 'ID',
   fullName: 'Full Name',
   date: 'Date',
@@ -19,13 +19,13 @@ const columns = {
 }
 
 const App = () => {
-  const [filteredData, setFilteredData] = useState(data)
-  const [hiddenColumns, setHiddenColumns] = useState([])
-  const [sortState, setSortState] = useState({ column: null, direction: null })
-  const [currentPage, setCurrentPage] = useState(0)
-  const [selectedRows, setSelectedRows] = useState([])
+  const [filteredData, setFilteredData] = useState<DataItem[]>(data)
+  const [hiddenColumns, setHiddenColumns] = useState<string[]>([])
+  const [sortState, setSortState] = useState<SortState>({ column: null, direction: null })
+  const [currentPage, setCurrentPage] = useState<number>(0)
+  const [selectedRows, setSelectedRows] = useState<string[]>([])
 
-  const handleSearch = (searchQuery) => {
+  const handleSearch = (searchQuery: string) => {
     setFilteredData(
       data.filter((item) =>
         Object.values(item).some((value) =>
@@ -36,7 +36,7 @@ const App = () => {
     setCurrentPage(0)
   }
 
-  const handleToggleColumn = (toggledColumn) => {
+  const handleToggleColumn = (toggledColumn: string) => {
     setHiddenColumns((prevHiddenColumns) => {
       if (prevHiddenColumns.includes(toggledColumn)) {
         return prevHiddenColumns.filter((c) => c !== toggledColumn)
@@ -46,16 +46,16 @@ const App = () => {
     })
   }
 
-  const handleSort = (sortedColumn) => {
+  const handleSort = (sortedColumn: string) => {
     setSortState((prevSortState) => {
-      let direction = 'ascending'
+      let direction: SortDirection = 'ascending'
       if (
         prevSortState.column === sortedColumn &&
         prevSortState.direction === 'ascending'
       ) {
         direction = 'descending'
       }
-      return { sortedColumn, direction }
+      return { column: sortedColumn, direction }
     })
   }
 
@@ -67,7 +67,7 @@ const App = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 0))
   }
 
-  const handleSelectRow = (selectedId) => {
+  const handleSelectRow = (selectedId: string) => {
     setSelectedRows((prevSelectedRows) => {
       if (prevSelectedRows.includes(selectedId)) {
         return prevSelectedRows.filter((rowId) => rowId !== selectedId)
@@ -81,7 +81,7 @@ const App = () => {
     setSelectedRows((prevSelectedRows) =>
       prevSelectedRows.length === filteredData.length
         ? []
-        : filteredData.map((item) => item.customerID),
+        : filteredData.map((item) => item.customerID.toString()),
     )
   }
 
