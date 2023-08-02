@@ -1,5 +1,13 @@
 const SearchBar = ({ onSearch }) => {
-  // TODO - logic for the search bar
+  return (
+    <>
+      <input
+        type='search'
+        placeholder='Search...'
+        onChange={(e) => onSearch(e.target.value)}
+      />
+    </>
+  )
 }
 
 export default SearchBar
