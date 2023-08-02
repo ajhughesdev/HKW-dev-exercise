@@ -1,4 +1,11 @@
-const ColumnToggler = ({ columns, onToggle }) => {
+import React from 'react'
+
+interface ColumnTogglerProps {
+  columns: { [key: string]: string }
+  onToggle: (key: string) => void
+}
+
+const ColumnToggler = ({ columns, onToggle }: ColumnTogglerProps) => {
   return (
     <>
       <h3>Column Settings</h3>

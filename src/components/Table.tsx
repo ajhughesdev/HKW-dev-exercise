@@ -1,5 +1,19 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
+
+import { Columns, DataItem, SortState } from './../types'
 import { ReactComponent as SortIcon } from './../assets/sort-icon.svg'
+
+interface TableProps {
+  data: DataItem[]
+  hiddenColumns: string[]
+  sortState: SortState
+  onSort: (key: string) => void
+  columns: Columns
+  currentPage: number
+  selectedRows: string[]
+  onSelectRow: (selectedId: string) => void
+  onSelectAllRows: () => void
+}
 
 const Table = ({
   data,
@@ -11,15 +25,15 @@ const Table = ({
   selectedRows,
   onSelectRow,
   onSelectAllRows,
-}) => {
+}: TableProps) => {
   const sortedData = useMemo(() => {
     let sortableItems = [...data]
-    if (sortState !== null) {
+    if (sortState.column) {
       sortableItems.sort((a, b) => {
-        if (a[sortState.column] < b[sortState.column]) {
+        if (sortState.column && a[sortState.column] < b[sortState.column]) {
           return sortState.direction === 'ascending' ? -1 : 1
         }
-        if (a[sortState.column] > b[sortState.column]) {
+        if (sortState.column && a[sortState.column] > b[sortState.column]) {
           return sortState.direction === 'ascending' ? 1 : -1
         }
         return 0
@@ -27,6 +41,7 @@ const Table = ({
     }
     return sortableItems
   }, [data, sortState])
+
 
   const currentPageData = sortedData.slice(
     currentPage * 15,
@@ -58,7 +73,7 @@ const Table = ({
       <tbody>
         {currentPageData.map((item) => (
           <tr key={item.customerID}>
-            <td><input type="checkbox" onChange={() => onSelectRow(item.customerID)} checked={selectedRows.includes(item.customerID)} /></td>
+            <td><input type="checkbox" onChange={() => onSelectRow(item.customerID.toString())} checked={selectedRows.includes(item.customerID.toString())} /></td>
             {Object.entries(columns).map(([key, value]) => {
               if (!hiddenColumns.includes(key)) {
                 if (key === 'clubMember') {
