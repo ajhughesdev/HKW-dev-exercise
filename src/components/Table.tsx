@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { Columns, DataItem, SortState } from './../types'
 import { ReactComponent as SortIcon } from './../assets/sort-icon.svg'
@@ -17,10 +17,10 @@ interface TableProps {
 
 const Table = ({
   data,
+  columns,
   hiddenColumns,
   sortState,
   onSort,
-  columns,
   currentPage,
   selectedRows,
   onSelectRow,

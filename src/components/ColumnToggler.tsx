@@ -1,7 +1,7 @@
-import React from 'react'
+import { Columns } from './../types'
 
 interface ColumnTogglerProps {
-  columns: { [key: string]: string }
+  columns: Columns
   onToggle: (key: string) => void
 }
 

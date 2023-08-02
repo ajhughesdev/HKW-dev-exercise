@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Columns, DataItem, SortDirection, SortState } from './types'
 import SearchBar from './components/SearchBar'
@@ -24,8 +24,10 @@ const App = () => {
   const [sortState, setSortState] = useState<SortState>({ column: null, direction: null })
   const [currentPage, setCurrentPage] = useState<number>(0)
   const [selectedRows, setSelectedRows] = useState<string[]>([])
+  const [searchTags, setSearchTags] = useState<string[]>([])
 
   const handleSearch = (searchQuery: string) => {
+    setSearchTags([...searchTags, searchQuery])
     setFilteredData(
       data.filter((item) =>
         Object.values(item).some((value) =>
@@ -34,6 +36,26 @@ const App = () => {
       ),
     )
     setCurrentPage(0)
+  }
+
+  const handleRemoveSearchTag = (index: number) => {
+    const newSearchTags = [...searchTags]
+    newSearchTags.splice(index, 1)
+    setSearchTags(newSearchTags)
+
+    if (newSearchTags.length > 0) {
+      setFilteredData(
+        data.filter((item) =>
+          newSearchTags.some(tag =>
+            Object.values(item).some(value =>
+              value.toString().toLowerCase().includes(tag.toLowerCase()),
+            )
+          )
+        ),
+      )
+    } else {
+      setFilteredData(data)
+    }
   }
 
   const handleToggleColumn = (toggledColumn: string) => {
@@ -87,7 +109,7 @@ const App = () => {
 
   return (
     <div>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} searchTags={searchTags} onRemoveSearchTag={(index: string) => handleRemoveSearchTag(Number(index))} />
       <ColumnToggler
         columns={columns}
         onToggle={handleToggleColumn}

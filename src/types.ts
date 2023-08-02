@@ -1,4 +1,5 @@
 export interface DataItem {
+  [key: string]: any
   customerID: number
   fullName: string
   date: string
