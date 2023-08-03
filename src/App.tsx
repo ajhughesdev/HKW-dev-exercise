@@ -1,11 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Columns, DataItem, SortDirection, SortState } from './types'
+import { useFetch } from './hooks/useFetch'
+
 import SearchBar from './components/SearchBar'
 import ColumnToggler from './components/ColumnToggler'
 import Table from './components/Table'
 
-import data from './mock_data.json'
+const url = './src/mock_data.json'
 
 const columns: Columns = {
   customerID: 'ID',
@@ -19,12 +21,22 @@ const columns: Columns = {
 }
 
 const App = () => {
-  const [filteredData, setFilteredData] = useState<DataItem[]>(data)
+  const { data, error } = useFetch<DataItem[]>(url)
+  const [filteredData, setFilteredData] = useState<DataItem[]>([])
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([])
   const [sortState, setSortState] = useState<SortState>({ column: null, direction: null })
   const [currentPage, setCurrentPage] = useState<number>(0)
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [searchTags, setSearchTags] = useState<string[]>([])
+
+  useEffect(() => {
+    if (data) {
+      setFilteredData(data)
+    }
+  }, [data])
+
+  if (error) return <p>There is an error.</p> // TODO #9 create Error component
+  if (!data) return <p>Loading...</p> // TODO #8 create Loading component
 
   const handleSearch = (searchQuery: string) => {
     const trimmedSearchQuery = searchQuery.trim()
