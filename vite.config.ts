@@ -7,8 +7,4 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig({
   base: '/HKW-dev-exercise',
   plugins: [react(), svgr()],
-  test: {
-    globals: true,
-    environment: 'happy-dom',
-  },
 })

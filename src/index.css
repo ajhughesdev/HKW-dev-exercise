@@ -134,9 +134,11 @@ h2 {
     cursor: pointer;
   }
 
-  & .tag {
-    font-family: 'Gibson-SemiBold', sans-serif;
-    color: var(--gray-500);
+  & span {
+    & > .tag {
+      font-family: 'Gibson-SemiBold', sans-serif;
+      color: var(--gray-500);
+    }
   }
 }
 
@@ -267,10 +269,11 @@ input[type='checkbox']:checked::before {
   display: block;
   overflow: auto;
   margin-inline-start: 40px;
+  padding-inline-end: 40px;
 }
 
 table {
-  padding-inline-end: 40px;
+  margin-inline: auto;
   overflow: scroll;
   display: block;
   position: absolute;
@@ -304,7 +307,7 @@ th:not(.checkbox) {
 }
 
 .checkbox {
-  padding: 12px 8px 12px 16px;
+  padding: 12px 12px 12px 16px;
   translate: 0 3px;
 }
 
@@ -319,6 +322,11 @@ thead tr {
   line-height: normal;
   letter-spacing: 0.65px;
   color: var(--gray-500);
+  position: relative;
+}
+
+tr {
+  position: relative;
 }
 
 tbody {
@@ -334,11 +342,11 @@ tbody tr:nth-child(even) {
 
 .email {
   text-decoration-line: underline;
-  
-  &:hover {
-    cursor: pointer;
-    color: 
-  }
+}
+
+.email:hover {
+  cursor: pointer;
+  color: var(--gray-300);
 }
 
 /* 

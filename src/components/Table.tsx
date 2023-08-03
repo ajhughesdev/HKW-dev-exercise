@@ -53,7 +53,7 @@ const Table = ({
 
         <thead className='fixed-header'>
           <tr>
-            <th className='checkbox cb-header '>
+            <th className='checkbox'>
               <input
                 type='checkbox'
                 onChange={onSelectAllRows}
@@ -88,7 +88,7 @@ const Table = ({
                   checked={selectedRows.includes(item.customerID.toString())}
                 />
               </td>
-              {Object.entries(columns).map(([key, value]) => {
+              {Object.entries(columns).map(([key]) => {
                 if (!hiddenColumns.includes(key)) {
                   if (key === 'clubMember') {
                     return <td key={key}>{item[key] ? 'Yes' : 'No'}</td>
@@ -98,7 +98,7 @@ const Table = ({
                     return <td key={key}>{date.toLocaleDateString()}</td>
                   }
                   if (key === 'email') {
-                    return <td key={key}><a href='mailto:{item[key]}' className='email'>Send email</a></td>
+                    return <td key={key}><a href={`mailto:${item[key]}`} className='email'>Send email</a></td>
                   }
                   return <td key={key}>{item[key]}</td>
                 }

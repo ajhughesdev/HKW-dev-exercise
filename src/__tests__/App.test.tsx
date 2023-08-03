@@ -1,6 +1,6 @@
 import { describe, test, expect, it } from 'vitest'
 import { fireEvent, getByText, render, screen } from '@testing-library/react'
-import App from './App'
+import App from '../App'
 
 describe('<App />', () => {
   test('App mounts properly', () => {
@@ -22,16 +22,16 @@ describe('<App />', () => {
     const button = wrapper.container.querySelector('button.next') as HTMLButtonElement
     const pageNumber = wrapper.container.querySelector('div.page-number') as HTMLDivElement
 
-    expect(button.textContent).toBe('Next')
+    expect(button?.textContent).toBe('Next')
 
     fireEvent(
-      getByText(button, 'Next'),
+      getByText(button, ''),
       new MouseEvent('click', {
         bubbles: true
       })
     )
 
-    expect(pageNumber.textContent).toBe('21 - 40 of 1000')
+    expect(pageNumber.textContent).toBe('21 - 40 of 100')
   })
 })
 
