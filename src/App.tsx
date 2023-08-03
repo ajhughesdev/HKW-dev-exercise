@@ -78,6 +78,16 @@ const App = () => {
     })
   }
 
+  const handleToggleAllColumns = () => {
+    setHiddenColumns(prevHiddenColumns => {
+      if (prevHiddenColumns.length === 0) {
+        return Object.keys(columns).map((key) => key)
+      } else {
+        return []
+      }
+    })
+  }
+
   const handleSort = (sortedColumn: string) => {
     setSortState((prevSortState) => {
       let direction: SortDirection = 'ascending'
@@ -118,33 +128,46 @@ const App = () => {
   }
 
   return (
-    <div>
-      <SearchBar onSearch={handleSearch} searchTags={searchTags} onRemoveSearchTag={(index: string) => handleRemoveSearchTag(index)} />
-      <ColumnToggler
-        columns={columns}
-        onToggle={handleToggleColumn}
-      />
-      <Table
-        data={filteredData}
-        hiddenColumns={hiddenColumns}
-        columns={columns}
-        sortState={sortState}
-        onSort={handleSort}
-        currentPage={currentPage}
-        selectedRows={selectedRows}
-        onSelectRow={handleSelectRow}
-        onSelectAllRows={handleSelectAllRows}
-      />
+    <>
+      <div className='header'>
+        <h1>Hi, Steve</h1>
+        <div className='navbar'>
+          <div>
+            <SearchBar onSearch={handleSearch} searchTags={searchTags} onRemoveSearchTag={(index: string) => handleRemoveSearchTag(index)} />
+          </div>
+          <div>
+            <ColumnToggler
+              columns={columns}
+              onToggle={handleToggleColumn}
+              hiddenColumns={hiddenColumns}
+              onToggleAll={handleToggleAllColumns}
+            />
+          </div>
+        </div>
+      </div>
+      <div className='report-wrapper'>
+        <Table
+          data={filteredData}
+          hiddenColumns={hiddenColumns}
+          columns={columns}
+          sortState={sortState}
+          onSort={handleSort}
+          currentPage={currentPage}
+          selectedRows={selectedRows}
+          onSelectRow={handleSelectRow}
+          onSelectAllRows={handleSelectAllRows}
+        />
+      </div>
       <div className='pagination'>
         <button onClick={handlePreviousPage}>Previous</button>
-        <div>
+        <div className='page-number'>
           {currentPage * 20 + 1} -{' '}
           {Math.min((currentPage + 1) * 20, filteredData.length)} of{' '}
           {filteredData.length}
         </div>
-        <button onClick={handleNextPage}>Next</button>
+        <button className='next' onClick={handleNextPage}>Next</button>
       </div>
-    </div>
+    </>
   )
 }
 

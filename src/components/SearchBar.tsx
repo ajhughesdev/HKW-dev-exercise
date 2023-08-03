@@ -11,7 +11,9 @@ const SearchBar = ({ onSearch, searchTags, onRemoveSearchTag }: SearchBarProps) 
 
   return (
     <>
+      <h2>Reports</h2>
       <input
+        className='search-bar'
         ref={inputRef}
         type='search'
         placeholder='Search...'
