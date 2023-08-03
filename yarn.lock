@@ -867,9 +867,9 @@ camelcase@^6.2.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001517:
-  version "1.0.30001518"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001518.tgz#b3ca93904cb4699c01218246c4d77a71dbe97150"
-  integrity sha512-rup09/e3I0BKjncL+FesTayKtPrdwKhUufQFd3riFw1hHg8JmIFoInYfB102cFcY/pPgGmdyl/iy+jgiDi2vdA==
+  version "1.0.30001519"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001519.tgz#3e7b8b8a7077e78b0eb054d69e6edf5c7df35601"
+  integrity sha512-0QHgqR+Jv4bxHMp8kZ1Kn8CH55OikjKJ6JmKkZYP1F3D7w+lnFXF70nG5eNfsZS89jadi5Ywy5UCSKLAglIRkg==
 
 chai@^4.3.7:
   version "4.3.7"
@@ -1055,9 +1055,9 @@ dom-accessibility-api@^0.5.9:
   integrity sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==
 
 electron-to-chromium@^1.4.477:
-  version "1.4.478"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.478.tgz#687198cfcef9b854a79a229feaa6cd8961206290"
-  integrity sha512-qjTA8djMXd+ruoODDFGnRCRBpID+AAfYWCyGtYTNhsuwxI19s8q19gbjKTwRS5z/LyVf5wICaIiPQGLekmbJbA==
+  version "1.4.482"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.482.tgz#77c5ed37b93d4dda860e27538e0e2a01d6a19e02"
+  integrity sha512-h+UqpfmEr1Qkk0zp7ej/jid7CXoq4m4QzW6wNTb0ELJ/BZCpA4wgUylBIMGCe621tnr4l5VmoHjdoSx2lbnNJA==
 
 email-addresses@^5.0.0:
   version "5.0.0"
@@ -1564,9 +1564,9 @@ graphemer@^1.4.0:
   integrity sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==
 
 happy-dom@^10.6.3:
-  version "10.6.3"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-10.6.3.tgz#9459008a5dec7b0cbf8f75e03c57aa385cfebe8b"
-  integrity sha512-se+f89YhkhoaZ52WrsfLWIS77FwzdbHi2lbPyyrIEnSeoTU4kAdvDIdezfs+IN23ZBDL7PkqAwscNWqkIp4Gyw==
+  version "10.7.0"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-10.7.0.tgz#923236e1377b983c51eee51b0b0035acde361f90"
+  integrity sha512-dJFPbA7KW4kkH3MFJBPTX73ywOfcrJcu6CAUw0CnCH0aEDcnPNG8QVmOAxsJSvTZFzLCnmSx/jMzAp00hdm0gw==
   dependencies:
     css.escape "^1.5.1"
     entities "^4.5.0"
@@ -2351,9 +2351,9 @@ rimraf@^3.0.2:
     glob "^7.1.3"
 
 rollup@^3.25.2:
-  version "3.27.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.27.0.tgz#15bd07e2e1cbfa9255bf6a3f04a432621c2f3550"
-  integrity sha512-aOltLCrYZ0FhJDm7fCqwTjIUEVjWjcydKBV/Zeid6Mn8BWgDCUBBWT5beM5ieForYNo/1ZHuGJdka26kvQ3Gzg==
+  version "3.27.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.27.1.tgz#e6c7340889f33042b4c3247a2acb38ebcfc3a98c"
+  integrity sha512-tXNDFwOkN6C2w5Blj1g6ForKeFw6c1mDu5jxoeDO3/pmYjgt+8yvIFjKzH5FQUq70OKZBkOt0zzv0THXL7vwzQ==
   optionalDependencies:
     fsevents "~2.3.2"
 
@@ -2502,9 +2502,9 @@ strip-json-comments@^3.1.1:
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
 strip-literal@^1.0.1:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/strip-literal/-/strip-literal-1.2.0.tgz#17246d5e39806ed6058e42c2bb974a3998af300c"
-  integrity sha512-tbehiynUAVoOhVKgpGG/xSIEPq3mDH3MmZ3957hiCBt2SnxkgOfXnZ8X2Kjfzb2L/6Vsv8Lnh8WT9qV5zQ0tMA==
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/strip-literal/-/strip-literal-1.3.0.tgz#db3942c2ec1699e6836ad230090b84bb458e3a07"
+  integrity sha512-PugKzOsyXpArk0yWmUwqOZecSO0GH0bPoctLcqNDH9J04pVW3lflYE0ujElBGTloevcxF5MofAOZ7C5l2b+wLg==
   dependencies:
     acorn "^8.10.0"
 
@@ -2693,21 +2693,10 @@ vite-plugin-svgr@^3.2.0:
     "@svgr/core" "^7.0.0"
     "@svgr/plugin-jsx" "^7.0.0"
 
-"vite@^3.0.0 || ^4.0.0":
+"vite@^3.0.0 || ^4.0.0", vite@^4.4.5:
   version "4.4.8"
   resolved "https://registry.yarnpkg.com/vite/-/vite-4.4.8.tgz#31e4a438f8748695c68bd57ffd262ba93540fdf7"
   integrity sha512-LONawOUUjxQridNWGQlNizfKH89qPigK36XhMI7COMGztz8KNY0JHim7/xDd71CZwGT4HtSRgI7Hy+RlhG0Gvg==
-  dependencies:
-    esbuild "^0.18.10"
-    postcss "^8.4.26"
-    rollup "^3.25.2"
-  optionalDependencies:
-    fsevents "~2.3.2"
-
-vite@^4.4.5:
-  version "4.4.7"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-4.4.7.tgz#71b8a37abaf8d50561aca084dbb77fa342824154"
-  integrity sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==
   dependencies:
     esbuild "^0.18.10"
     postcss "^8.4.26"
