@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 import { ReactComponent as CloseBtn } from './../assets/close-btn.svg'
 
@@ -31,7 +31,7 @@ const SearchBar = ({ onSearch, searchTags, onRemoveSearchTag }: SearchBarProps) 
           }}
         />
       </div>
-      <div className='search-tags'>
+      <div className={`search-tags ${searchTags.length > 0 ? '' : 'empty'}`}>
         {searchTags.map((tag, i) => (
           <div key={i} className='search-tag'>
             <span>

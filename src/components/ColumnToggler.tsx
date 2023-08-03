@@ -7,6 +7,7 @@ interface ColumnTogglerProps {
   onToggle: (key: string) => void
   hiddenColumns: string[]
   onToggleAll: () => void
+  searchTags: string[]
 }
 
 const ColumnToggler = ({
@@ -14,6 +15,7 @@ const ColumnToggler = ({
   onToggle,
   hiddenColumns,
   onToggleAll,
+  searchTags
 }: ColumnTogglerProps) => {
   const [isExpanded, setIsExpanded] = useState(false)
 
@@ -21,7 +23,7 @@ const ColumnToggler = ({
   const handleMouseLeave = () => setIsExpanded(false)
 
   return (
-    <div className='column-settings'
+    <div className={`column-settings ${searchTags.length > 0 ? 'has-tags' : ''} ${isExpanded ? 'expanded' : ''}}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

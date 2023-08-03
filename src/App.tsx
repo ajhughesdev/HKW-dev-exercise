@@ -146,6 +146,7 @@ const App = () => {
               onToggle={handleToggleColumn}
               hiddenColumns={hiddenColumns}
               onToggleAll={handleToggleAllColumns}
+              searchTags={searchTags}
             />
           </div>
         </div>

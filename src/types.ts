@@ -20,3 +20,4 @@ export interface SortState {
 export interface Columns {
   [key: string]: string
 }
+

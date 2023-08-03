@@ -96,7 +96,7 @@ h2 {
   width: 14.5625rem;
   align-items: center;
   border: 1px solid var(--gray-300);
-  margin-block: 0.75rem 1rem;
+  margin-block-start: 0.75rem;
   grid-area: search;
 
   &::placeholder {
@@ -106,11 +106,16 @@ h2 {
   }
 }
 
+.search-tags.empty {
+  margin-block-start: 20px;
+}
+
 .search-tags {
-  grid-area: tags;
+  /* width: 100vw; */
+  margin-block-start: 1rem;
   max-height: 40px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
@@ -149,8 +154,8 @@ h2 {
   background-color: var(--white);
 }
 
-.column-settings:hover {
-  transition: 250ms;
+.column-settings.has-tags {
+  margin-block-end: 56px;
 }
 
 .column-settings:hover .column-toggler,
@@ -313,7 +318,6 @@ th:not(.checkbox) {
 
 thead tr {
   display: flex;
-  fkex-direction: column;
   top: 0;
   background: var(--gray-100);
   text-transform: uppercase;
@@ -323,6 +327,13 @@ thead tr {
   letter-spacing: 0.65px;
   color: var(--gray-500);
   position: relative;
+}
+
+tr th {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
 }
 
 tr {
