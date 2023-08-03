@@ -427,6 +427,7 @@ tr:nth-child(even) {
   display: flex;
   align-items: center;
   padding: 8px;
+  cursor: pointer;
 }
 
 .next svg {

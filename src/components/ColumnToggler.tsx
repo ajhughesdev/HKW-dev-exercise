@@ -23,7 +23,7 @@ const ColumnToggler = ({
   const handleMouseLeave = () => setIsExpanded(false)
 
   return (
-    <div className={`column-settings ${searchTags.length > 0 ? 'has-tags' : ''} ${isExpanded ? 'expanded' : ''}}`}
+    <div className={`column-settings ${searchTags.length > 0 ? 'has-tags' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
