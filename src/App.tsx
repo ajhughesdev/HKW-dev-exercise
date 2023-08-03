@@ -159,13 +159,26 @@ const App = () => {
       />
 
       <div className='pagination'>
-        <button onClick={handlePreviousPage}>Previous</button>
+        <button onClick={handlePreviousPage} className='pagination-btn'>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='page-btn'>
+            <g id="Frame">
+              <path id="Vector" d="M8 12L14 6V18L8 12Z" fill="#151718" />
+            </g>
+          </svg>
+          <span>Prev</span>
+        </button>
         <div className='page-number'>
-          {currentPage * 20 + 1} -{' '}
+          {currentPage * 20 + 1}-
           {Math.min((currentPage + 1) * 20, filteredData.length)} of{' '}
           {filteredData.length}
         </div>
-        <button className='next' onClick={handleNextPage}>Next</button>
+        <button className='pagination-btn next' onClick={handleNextPage}>
+          <span>Next</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="Frame">
+              <path id="Vector" d="M8 12L14 6V18L8 12Z" fill="#151718" />
+            </g>
+          </svg></button>
       </div>
     </>
   )
