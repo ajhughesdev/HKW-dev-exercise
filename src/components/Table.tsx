@@ -48,60 +48,62 @@ const Table = ({
   )
 
   return (
-    <table className='report'>
-      <thead>
-        <tr>
-          <th className='checkbox'>
-            <input
-              type='checkbox'
-              onChange={onSelectAllRows}
-              checked={selectedRows.length === data.length}
-            />
-          </th>
-          {Object.entries(columns).map(([key, value]) =>
-            !hiddenColumns.includes(key) ? (
-              <th
-                className='report-header'
-                key={key}
-                onClick={() => onSort(key)}
-              >
-                {value}
-                <SortIcon
-                  width={12}
-                  height={12}
-                />
-              </th>
-            ) : null,
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {currentPageData.map((item) => (
-          <tr key={item.customerID}>
-            <td>
+    <div className='report-wrapper'>
+      <table className='report'>
+        <thead>
+          <tr>
+            <th className='checkbox '>
               <input
                 type='checkbox'
-                onChange={() => onSelectRow(item.customerID.toString())}
-                checked={selectedRows.includes(item.customerID.toString())}
+                onChange={onSelectAllRows}
+                checked={selectedRows.length === data.length}
               />
-            </td>
-            {Object.entries(columns).map(([key, value]) => {
-              if (!hiddenColumns.includes(key)) {
-                if (key === 'clubMember') {
-                  return <td key={key}>{item[key] ? 'Yes' : 'No'}</td>
-                }
-                if (key === 'date') {
-                  const date = new Date(item[key])
-                  return <td key={key}>{date.toLocaleDateString()}</td>
-                }
-                return <td key={key}>{item[key]}</td>
-              }
-              return null
-            })}
+            </th>
+            {Object.entries(columns).map(([key, value]) =>
+              !hiddenColumns.includes(key) ? (
+                <th
+                  className='report-header'
+                  key={key}
+                  onClick={() => onSort(key)}
+                >
+                  {value}
+                  <SortIcon
+                    width={12}
+                    height={12}
+                  />
+                </th>
+              ) : null,
+            )}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {currentPageData.map((item) => (
+            <tr key={item.customerID}>
+              <td>
+                <input
+                  type='checkbox'
+                  onChange={() => onSelectRow(item.customerID.toString())}
+                  checked={selectedRows.includes(item.customerID.toString())}
+                />
+              </td>
+              {Object.entries(columns).map(([key, value]) => {
+                if (!hiddenColumns.includes(key)) {
+                  if (key === 'clubMember') {
+                    return <td key={key}>{item[key] ? 'Yes' : 'No'}</td>
+                  }
+                  if (key === 'date') {
+                    const date = new Date(item[key])
+                    return <td key={key}>{date.toLocaleDateString()}</td>
+                  }
+                  return <td key={key}>{item[key]}</td>
+                }
+                return null
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 

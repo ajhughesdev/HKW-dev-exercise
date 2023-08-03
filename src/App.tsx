@@ -145,19 +145,19 @@ const App = () => {
           </div>
         </div>
       </div>
-      <div className='report-wrapper'>
-        <Table
-          data={filteredData}
-          hiddenColumns={hiddenColumns}
-          columns={columns}
-          sortState={sortState}
-          onSort={handleSort}
-          currentPage={currentPage}
-          selectedRows={selectedRows}
-          onSelectRow={handleSelectRow}
-          onSelectAllRows={handleSelectAllRows}
-        />
-      </div>
+
+      <Table
+        data={filteredData}
+        hiddenColumns={hiddenColumns}
+        columns={columns}
+        sortState={sortState}
+        onSort={handleSort}
+        currentPage={currentPage}
+        selectedRows={selectedRows}
+        onSelectRow={handleSelectRow}
+        onSelectAllRows={handleSelectAllRows}
+      />
+
       <div className='pagination'>
         <button onClick={handlePreviousPage}>Previous</button>
         <div className='page-number'>

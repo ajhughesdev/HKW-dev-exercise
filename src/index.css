@@ -38,7 +38,7 @@
   color-scheme: light;
   color: var(--gray-500);
   background-color: var(--white);
-  padding-block-start: 56px;
+
   min-height: 100dvh;
   width: 100%;
 
@@ -56,7 +56,9 @@
 
 .header {
   position: fixed;
-  width: 100%;
+  display: block;
+  padding-block-start: 56px;
+  width: calc(100dvw - 80px);
   margin-inline: 40px;
 }
 
@@ -218,22 +220,55 @@ input[type="checkbox"]:checked::before {
 }
 
 .report-wrapper {
-  overflow-x: auto;
-  height: 600px;
   margin-inline-start: 40px;
-
+  overflow: auto;
+  /* height: 100dvh; */
+  display: block;
 }
 
-.report {
-  min-width: 100%;
-  margin-block: 240px 0;
+
+
+thead th:not(.checkbox) {}
+
+table {
+  height: 600px;
+  width: 1864px;
   border-collapse: collapse;
+  margin-top: 288px;
+  table-layout: fixed;
+  display: block;
 }
 
-thead th:not(.checkbox) {
+thead tr,
+tbody {
+  display: block;
+}
+
+/* thead th:not(.checkbox) {
   min-width: 233px;
+} */
+
+tbody {
+  height: 560px;
+  overflow: auto;
 }
 
+tbody td:not(.checkbox),
+thead th:not(.checkbox) {
+  width: 233px;
+}
+
+thead th:last-child {
+  width: 249px;
+}
+
+td tr:not(.checkbox) {
+  min-width: 233px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: no-wrap;
+  text-overflow: ellipsis;
+}
 
 th,
 td {
@@ -263,8 +298,11 @@ tr:nth-child(even) {
 }
 
 .pagination {
+  position: fixed;
+  width: 100%;
   padding-block-start: 12px;
   padding-inline: 40px;
+  padding-bottom: 70px;
   display: flex;
   justify-content: space-between;
 }
