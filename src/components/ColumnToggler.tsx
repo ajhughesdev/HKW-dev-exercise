@@ -34,31 +34,31 @@ const ColumnToggler = ({
       >
         <ColumnSettingsIcon width={20} />
         <h3> Column Settings</h3>
-        <div className='column-toggler'>
-          <div className='column-toggler-header'>
-            <h4>Select Columns</h4>
-            <span
-              onClick={onToggleAll}
-            >
-              Select All
-            </span>
-          </div>
-          {Object.entries(columns).map(([key, value]) => (
-            <div key={key} className='column-toggler-checkbox'>
-              <span>{value}</span>
-              <label htmlFor={value} className='form-control'>
-                <input
-                  type='checkbox'
-                  id={value}
-                  checked={!hiddenColumns.includes(key)}
-                  onChange={() => onToggle(key)}
-                  className='checkmark'
-                />
-              </label>
-            </div>
-          ))}
-        </div>
       </button>
+      <div className='column-toggler'>
+        <div className='column-toggler-header'>
+          <h4>Select Columns</h4>
+          <span
+            onClick={onToggleAll}
+          >
+            Select All
+          </span>
+        </div>
+        {Object.entries(columns).map(([key, value]) => (
+          <div key={key} className='column-toggler-checkbox'>
+            <span>{value}</span>
+            <label htmlFor={value} className='form-control'>
+              <input
+                type='checkbox'
+                id={value}
+                checked={!hiddenColumns.includes(key)}
+                onChange={() => onToggle(key)}
+                className='checkmark'
+              />
+            </label>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

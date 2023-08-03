@@ -1,5 +1,7 @@
 import { useRef } from 'react'
 
+import { ReactComponent as CloseBtn } from './../assets/close-btn.svg'
+
 interface SearchBarProps {
   onSearch: (searchQuery: string) => void
   searchTags: string[]
@@ -11,28 +13,32 @@ const SearchBar = ({ onSearch, searchTags, onRemoveSearchTag }: SearchBarProps) 
 
   return (
     <>
-      <h2>Reports</h2>
-      <input
-        className='search-bar'
-        ref={inputRef}
-        type='search'
-        placeholder='Search...'
-        onKeyDown={(e) => {
-          const target = e.target as HTMLInputElement
-          if (e.key === 'Enter' && target.value) {
-            onSearch(target.value)
-            if (inputRef.current) {
-              inputRef.current.value = ''
-            }
-          }
-        }}
-      />
       <div>
+        <h2>Reports</h2>
+        <input
+          className='search-bar'
+          ref={inputRef}
+          type='search'
+          placeholder='Search...'
+          onKeyDown={(e) => {
+            const target = e.target as HTMLInputElement
+            if (e.key === 'Enter' && target.value) {
+              onSearch(target.value)
+              if (inputRef.current) {
+                inputRef.current.value = ''
+              }
+            }
+          }}
+        />
+      </div>
+      <div className='search-tags'>
         {searchTags.map((tag, i) => (
-          <span key={i}>
-            {tag}
-            <button onClick={() => onRemoveSearchTag(tag)}>x</button>
-          </span>
+          <div key={i} className='search-tag'>
+            <span>
+              <span>Showing results for <span className='tag'>{tag}</span></span>
+            </span>
+            <button onClick={() => onRemoveSearchTag(tag)}><CloseBtn width={20} /></button>
+          </div>
         ))}
       </div>
     </>

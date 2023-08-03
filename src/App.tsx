@@ -101,8 +101,13 @@ const App = () => {
     })
   }
 
+  const rowsPerPage = 20
+  const totalPages = Math.ceil(filteredData.length / rowsPerPage)
+
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1)
+    if (currentPage < totalPages - 1) {
+      setCurrentPage((prevPage) => prevPage + 1)
+    }
   }
 
   const handlePreviousPage = () => {
@@ -159,7 +164,7 @@ const App = () => {
       />
 
       <div className='pagination'>
-        <button onClick={handlePreviousPage} className='pagination-btn'>
+        <button onClick={handlePreviousPage} disabled={currentPage === 0} className='pagination-btn'>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='page-btn'>
             <g id="Frame">
               <path id="Vector" d="M8 12L14 6V18L8 12Z" fill="#151718" />
@@ -172,7 +177,7 @@ const App = () => {
           {Math.min((currentPage + 1) * 20, filteredData.length)} of{' '}
           {filteredData.length}
         </div>
-        <button className='pagination-btn next' onClick={handleNextPage}>
+        <button className='pagination-btn next' onClick={handleNextPage} disabled={currentPage >= totalPages - 1}>
           <span>Next</span>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="Frame">

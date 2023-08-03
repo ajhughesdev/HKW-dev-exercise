@@ -43,16 +43,17 @@ const Table = ({
   }, [data, sortState])
 
   const currentPageData = sortedData.slice(
-    currentPage * 15,
-    (currentPage + 1) * 15,
+    currentPage * 20,
+    (currentPage + 1) * 20,
   )
 
   return (
-    <div className='report-wrapper'>
-      <table className='report'>
-        <thead>
+    <div className='wrapper'>
+      <table border={0} cellPadding={0} cellSpacing={0} width='100%' className='report'>
+
+        <thead className='fixed-header'>
           <tr>
-            <th className='checkbox '>
+            <th className='checkbox cb-header '>
               <input
                 type='checkbox'
                 onChange={onSelectAllRows}
@@ -76,10 +77,11 @@ const Table = ({
             )}
           </tr>
         </thead>
+        
         <tbody>
           {currentPageData.map((item) => (
             <tr key={item.customerID}>
-              <td>
+              <td className='checkbox'>
                 <input
                   type='checkbox'
                   onChange={() => onSelectRow(item.customerID.toString())}
@@ -103,7 +105,7 @@ const Table = ({
           ))}
         </tbody>
       </table>
-    </div>
+    </div >
   )
 }
 
