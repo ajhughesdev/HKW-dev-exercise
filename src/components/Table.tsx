@@ -77,7 +77,7 @@ const Table = ({
             )}
           </tr>
         </thead>
-        
+
         <tbody>
           {currentPageData.map((item) => (
             <tr key={item.customerID}>
@@ -96,6 +96,9 @@ const Table = ({
                   if (key === 'date') {
                     const date = new Date(item[key])
                     return <td key={key}>{date.toLocaleDateString()}</td>
+                  }
+                  if (key === 'email') {
+                    return <td key={key}><a href='mailto:{item[key]}' className='email'>Send email</a></td>
                   }
                   return <td key={key}>{item[key]}</td>
                 }

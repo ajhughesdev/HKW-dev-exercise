@@ -290,9 +290,8 @@ table {
 
 td,
 th {
-  text-overflow: ellipsis;
   overflow: hidden;
-  white-space: no-wrap;
+  white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 13px;
   max-height: 40px;
@@ -331,6 +330,15 @@ tbody {
 
 tbody tr:nth-child(even) {
   background-color: var(--gray-100);
+}
+
+.email {
+  text-decoration-line: underline;
+  
+  &:hover {
+    cursor: pointer;
+    color: 
+  }
 }
 
 /* 
