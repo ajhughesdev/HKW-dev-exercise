@@ -1,0 +1,148 @@
+@import './../index';
+
+.report-wrapper {
+  display: block;
+  position: relative;
+  width: 100%;
+  min-height: rem-calc(600, 16);
+  overflow: auto;
+  margin-inline-start: rem-calc(40, 16);
+  font-weight: 400;
+  font-size: rem-calc(13, 16);
+  color: $gray-500;
+
+  @media screen and (max-width: 640px) {
+    margin-inline: 1rem;
+  }
+
+  & .report {
+    display: block;
+    position: absolute;
+    scrollbar-width: thin;
+
+    & thead {
+      position: sticky;
+      will-change: transform;
+      background-color: $gray-100;
+      font-weight: 700;
+      letter-spacing: rem-calc(0.64, 16);
+      z-index: 1;
+      text-transform: uppercase;
+      top: 0;
+      left: 0;
+
+      & .table-header-row {
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        & .table-header-cell {
+          gap: 0.5rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  & tbody {
+    width: 100%;
+    display: block;
+
+    & .table-body-row:nth-child(even) {
+      background-color: $gray-100;
+    }
+  }
+}
+
+.table-header-row,
+.table-body-row {
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+}
+
+.checkbox {
+  padding: rem-calc(12 8 12 12, 16);
+}
+
+.table-header-cell,
+.table-body-cell {
+  @include text-crop;
+  font-size: $crop-font-size;
+
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &:not(.checkbox) {
+    padding: rem-calc(12 12 12 16, 16);
+    width: rem-calc(233, 16);
+
+    @media screen and (max-width: 640px) {
+      padding: rem-calc(12 12 12 12, 16);
+    }
+  }
+
+  &:nth-child(2) {
+    padding: rem-calc(12 12 12 0, 16);
+    width: rem-calc(193, 16);
+
+    @media screen and (max-width: 640px) {
+      padding: rem-calc(12 12 12 12, 16);
+    }
+  }
+}
+
+.customer-id,
+.email:hover {
+  text-decoration: underline;
+  text-decoration-line: underline;
+  text-underline-offset: rem-calc(2, 16);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+  .table-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    height: auto;
+  }
+
+  .table-header-cell,
+  .table-body-cell {
+    min-width: calc(
+      375px - 2rem
+    ) !important; /* override other width specifications */
+    margin: 0;
+  }
+
+  /* Hide all table cells except the first one in each row */
+  .table-header-cell:not(.checkbox) {
+    display: none;
+  }
+
+  .table-body-row {
+    flex-direction: column;
+    align-items: baseline;
+  }
+
+  .table-body-cell:not(.checkbox) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    // padding: 1rem 2rem 2rem 12px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .table-body-cell:not(.checkbox):before {
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: left;
+    font-weight: bold;
+  }
+}

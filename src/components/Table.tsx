@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import { Columns, DataItem, SortState } from './../types'
 import renderCell from './../utilities/utilities.tsx'
 import { ReactComponent as SortIcon } from './../assets/sort-icon.svg'
+import css from './table.module.scss'
 
 interface TableProps {
   data: DataItem[]
@@ -52,15 +53,15 @@ const Table = ({
   )
 
   return (
-    <div className='wrapper'>
+    <div className={css['report-wrapper']}>
 
       {Object.keys(columns).length === 0 && <div>Loading...</div>}
 
-      <table border={0} cellPadding={0} cellSpacing={0} width='100%' className='report'>
+      <table border={0} cellPadding={0} cellSpacing={0} width='100%' className={css.report}>
 
-        <thead className='fixed-header'>
-          <tr>
-            <th className='checkbox'>
+        <thead>
+          <tr className={`${css['table-header-row']} ${css['table-row']}`}>
+            <th className={`${css.checkbox} ${css['table-header-cell']}`}>
               <input
                 type='checkbox'
                 onChange={onSelectAllRows}
@@ -70,7 +71,7 @@ const Table = ({
             {Object.entries(columns).map(([key, value]) =>
               !hiddenColumns.includes(key) ? (
                 <th
-                  className='report-header'
+                  className={css['table-header-cell']}
                   key={key}
                   onClick={() => onSort(key)}
                 >
@@ -87,17 +88,17 @@ const Table = ({
 
         <tbody>
           {currentPageData.map((item) => (
-            <tr key={item.id}>
-              <td className='checkbox'>
+            <tr key={item.id} className={`${css['table-body-row']} ${css['table-row']}`}>
+              <td className={`${css.checkbox} ${css['table-body-cell']}`}>
                 <input
                   type='checkbox'
-                  onChange={() => onSelectRow(item.id.toString())}
-                  checked={selectedRows.includes(item.id.toString())}
+                  onChange={() => onSelectRow(item.id)}
+                  checked={selectedRows.includes(item.id)}
                 />
               </td>
-              {Object.entries(columns).map(([key]) => {
+              {Object.entries(columns).map(([key, value]) => {
                 if (!hiddenColumns.includes(key)) {
-                  return <td key={key}>{renderCell(item[key], key)}</td>
+                  return <td data-label={value} key={key} className={css['table-body-cell']}>{renderCell(item[key], key)}</td>
                 }
                 return null
               })}

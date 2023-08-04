@@ -1,0 +1,23 @@
+@mixin text-crop(
+  $line-height: $crop-line-height,
+  $top-adjustment: $top-crop,
+  $bottom-adjustment: $bottom-crop
+) {
+  $dynamic-top-crop: calc(
+    max(
+        (
+          $top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)
+        ),
+        0
+      ) / $crop-font-size
+  );
+  $dynamic-bottom-crop: calc(
+    max(
+        (
+          $bottom-crop + ($line-height - $crop-line-height) *
+            ($crop-font-size / 2)
+        ),
+        0
+      ) / $crop-font-size
+  );
+}

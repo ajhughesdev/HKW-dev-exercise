@@ -1,3 +1,5 @@
+import css from './../components/table.module.scss'
+
 export default function renderCell(value: any, key: string) {
   const lowerCaseKey = key.toLowerCase()
 
@@ -5,12 +7,16 @@ export default function renderCell(value: any, key: string) {
     return value ? 'Yes' : 'No'
   }
 
-  if (typeof value === 'number' || typeof value === 'bigint' || typeof value === 'symbol' || typeof value === 'function') {
+  if (typeof value === 'bigint' || typeof value === 'symbol' || typeof value === 'function') {
     return value.toString()
   }
 
   if (typeof value === 'undefined' || value === null) {
     return ''
+  }
+
+  if (typeof value === 'number') {
+    return <button className={css['customer-id']}>{value.toString()}</button>
   }
 
   if (lowerCaseKey.includes('date') && Date.parse(value)) {
@@ -19,15 +25,15 @@ export default function renderCell(value: any, key: string) {
   }
 
   if (lowerCaseKey.includes('email')) {
-    return <a href={`mailto:${value}`} className='email'>Send email</a>
+    return <a href={`mailto:${value}`} className={css.email}>Send email</a>
   }
 
   if (lowerCaseKey.includes('phone')) {
-    return <a href={`tel:${value}`} className='phone'>Call</a>
+    return <a href={`tel:${value}`} className={css.phone}>Call</a>
   }
 
-  if (lowerCaseKey.includes('url') || lowerCaseKey.includes('href')) {
-    return <a href={value} className='url'>{value}</a>
+  if (lowerCaseKey.includes('url') || lowerCaseKey.includes('href') || lowerCaseKey.includes('link')) {
+    return <a href={value} className={css.url}>{value}</a>
   }
 
   return value
