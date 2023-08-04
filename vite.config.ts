@@ -5,6 +5,6 @@ import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/HKW-dev-exercise/',
+  base: '/HKW-dev-exercise',
   plugins: [react(), svgr()],
 })
