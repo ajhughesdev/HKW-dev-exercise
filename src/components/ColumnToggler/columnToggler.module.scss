@@ -1,0 +1,100 @@
+@import './../../index';
+
+.column-settings {
+  position: relative;
+  margin-block-end: rem-calc(20, 16);
+  z-index: 100;
+  background-color: $white;
+}
+
+.column-settings.has-tags {
+  margin-block-end: rem-calc(56, 16);
+}
+
+.column-settings:hover .column-toggler,
+.button[aria-expanded='true'] + .column-toggler {
+  opacity: 1;
+  visibility: visible;
+}
+
+.button {
+  display: inline-flex;
+  padding: rem-calc(12 12, 16);
+  align-items: center;
+  gap: rem-calc(8, 16);
+  border: rem-calc(1, 16) solid $gray-500;
+  cursor: pointer;
+}
+
+.h3,
+.h4 {
+  color: $gray-500;
+  font-family: 'Gibson', sans-serif;
+  font-weight: 600;
+  font-size: rem-calc(16, 16);
+  line-height: rem-calc(16, 16);
+  letter-spacing: rem-calc(-0.32, 16);
+}
+
+.h3 {
+  display: none;
+
+  @media screen and (min-width: rem-calc(640, 16)) {
+    display: flex;
+  }
+}
+
+.column-toggler-header span {
+  color: $gray-400;
+  font-family: 'Gibson', sans-serif;
+  font-size: rem-calc(16, 16);
+  line-height: rem-calc(24, 16);
+
+  &:hover {
+    color: $gray-500;
+  }
+}
+
+.column-toggler {
+  position: absolute;
+  top: rem-calc(48, 16);
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms, visibility 250ms;
+  display: flex;
+  width: rem-calc(282, 16);
+  padding-inline: rem-calc(1, 16);
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: rem-calc(10, 16);
+  border: rem-calc(1, 16) solid $gray-500;
+  background: $white;
+  box-shadow: rem-calc(4, 16) rem-calc(4, 16) rem-calc(4, 16) 0
+    rgb(0 0 0 / 0.25);
+  z-index: 5;
+}
+
+.column-toggler-header {
+  display: flex;
+  padding: rem-calc(20, 16) rem-calc(16, 16);
+  align-items: center;
+  align-self: stretch;
+  justify-content: space-between;
+
+  & span {
+    color: $gray-400;
+    cursor: pointer;
+    text-decoration-line: underline;
+    text-decoration: underline;
+  }
+}
+
+.column-toggler-checkbox {
+  display: flex;
+  padding: rem-calc(12, 16) rem-calc(16, 16);
+  align-items: center;
+  gap: rem-calc(8, 16);
+  align-self: stretch;
+  justify-content: space-between;
+}

@@ -1,4 +1,4 @@
-import css from './../components/table.module.scss'
+import css from './../components/Table/table.module.scss'
 
 export default function renderCell(value: any, key: string) {
   const lowerCaseKey = key.toLowerCase()

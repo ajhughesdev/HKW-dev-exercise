@@ -5,8 +5,8 @@ import { Columns, DataItem, SortDirection, SortState } from './types'
 import { useFetch } from './utilities/hooks/useFetch'
 
 import SearchBar from './components/SearchBar'
-import ColumnToggler from './components/ColumnToggler'
-import Table from './components/Table'
+import ColumnToggler from './components/ColumnToggler/ColumnToggler'
+import Table from './components/Table/Table'
 
 const url = 'https://ajhughesdev.github.io/HKW-dev-exercise/mock_data.json'
 const rowsPerPage = 20
@@ -31,7 +31,7 @@ const App = () => {
       }))
 
       setFilteredData(dataWithIds)
-      
+
       const columnsFromData: Columns = {}
       Object.keys(data[0]).forEach(key => {
         columnsFromData[key] = camelToTitle(key)

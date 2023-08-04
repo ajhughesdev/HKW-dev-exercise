@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 
-import { Columns, DataItem, SortState } from './../types'
-import renderCell from './../utilities/utilities.tsx'
-import { ReactComponent as SortIcon } from './../assets/sort-icon.svg'
+import { Columns, DataItem, SortState } from '../../types.ts'
+import renderCell from '../../utilities/utilities.tsx'
+import { ReactComponent as SortIcon } from './../../assets/sort-icon.svg'
 import css from './table.module.scss'
 
 interface TableProps {
