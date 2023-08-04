@@ -4,7 +4,7 @@ import { camelToTitle, genUniqueId } from './utilities/utilities'
 import { Columns, DataItem, SortDirection, SortState } from './types'
 import { useFetch } from './utilities/hooks/useFetch'
 
-import SearchBar from './components/SearchBar'
+import SearchBar from './components/SearchBar/SearchBar'
 import ColumnToggler from './components/ColumnToggler/ColumnToggler'
 import Table from './components/Table/Table'
 

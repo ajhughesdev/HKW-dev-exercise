@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 
-import { ReactComponent as CloseBtn } from './../assets/close-btn.svg'
+import { ReactComponent as CloseBtn } from './../../assets/close-btn.svg'
+import css from './searchBar.module.scss'
 
 interface SearchBarProps {
   onSearch: (searchQuery: string) => void
@@ -16,7 +17,7 @@ const SearchBar = ({ onSearch, searchTags, onRemoveSearchTag }: SearchBarProps) 
       <div>
         <h2>Reports</h2>
         <input
-          className='search-bar'
+          className={css['search-bar']}
           ref={inputRef}
           type='search'
           placeholder='Search...'
@@ -31,11 +32,11 @@ const SearchBar = ({ onSearch, searchTags, onRemoveSearchTag }: SearchBarProps) 
           }}
         />
       </div>
-      <div className={`search-tags ${searchTags.length > 0 ? '' : 'empty'}`}>
+      <div className={`${css['search-tags']} ${searchTags.length > 0 ? '' : css.empty}`}>
         {searchTags.map((tag, i) => (
-          <div key={i} className='search-tag'>
+          <div key={i} className={css['search-tag']}>
             <span>
-              <span>Showing results for <span className='tag'>{tag}</span></span>
+              <span>Showing results for <span className={css.tag}>{tag}</span></span>
             </span>
             <button onClick={() => onRemoveSearchTag(tag)}><CloseBtn width={20} /></button>
           </div>
