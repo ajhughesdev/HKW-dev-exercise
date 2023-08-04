@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 
 import { ReactComponent as CloseBtn } from './../../assets/close-btn.svg'
 import css from './searchBar.module.scss'
@@ -33,8 +33,8 @@ const SearchBar = ({ onSearch, searchTags, onRemoveSearchTag }: SearchBarProps) 
         />
       </div>
       <div className={`${css['search-tags']} ${searchTags.length > 0 ? '' : css.empty}`}>
-        {searchTags.map((tag, i) => (
-          <div key={i} className={css['search-tag']}>
+        {searchTags.map((tag, index) => (
+          <div key={index} className={css['search-tag']}>
             <span>
               <span>Showing results for <span className={css.tag}>{tag}</span></span>
             </span>

@@ -75,11 +75,13 @@ const Table = ({
                   key={key}
                   onClick={() => onSort(key)}
                 >
-                  {value}
-                  <SortIcon
-                    width={12}
-                    height={12}
-                  />
+                  <span>
+                    {value}
+                    <SortIcon
+                      width={12}
+                      height={12}
+                    />
+                  </span>
                 </th>
               ) : null,
             )}

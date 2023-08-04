@@ -25,7 +25,7 @@ export default function renderCell(value: any, key: string) {
   }
 
   if (lowerCaseKey.includes('email')) {
-    return <a href={`mailto:${value}`} className={css.email}>Send email</a>
+    return <a href={`mailto:${value}`} className={css.email} title={value}>Send email</a>
   }
 
   if (lowerCaseKey.includes('phone')) {
