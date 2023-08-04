@@ -1,28 +1,20 @@
 import { useEffect, useState } from 'react'
 
+import { camelToTitle, genUniqueId } from './utilities/utilities'
 import { Columns, DataItem, SortDirection, SortState } from './types'
-import { useFetch } from './hooks/useFetch'
+import { useFetch } from './utilities/hooks/useFetch'
 
 import SearchBar from './components/SearchBar'
 import ColumnToggler from './components/ColumnToggler'
 import Table from './components/Table'
 
-const url = './src/mock_data.json'
-
-const columns: Columns = {
-  customerID: 'ID',
-  fullName: 'Full Name',
-  date: 'Date',
-  orderNumber: 'Order Number',
-  email: 'Email',
-  orderStatus: 'Order Status',
-  clubMember: 'Club Member',
-  location: 'Location',
-}
+const url = '/src/mock_data.json'
+const rowsPerPage = 20
 
 const App = () => {
   const { data, error } = useFetch<DataItem[]>(url)
   const [filteredData, setFilteredData] = useState<DataItem[]>([])
+  const [columns, setColumns] = useState<Columns>({})
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([])
   const [sortState, setSortState] = useState<SortState>({ column: null, direction: null })
   const [currentPage, setCurrentPage] = useState<number>(0)
@@ -31,11 +23,24 @@ const App = () => {
 
   useEffect(() => {
     if (data) {
-      setFilteredData(data)
+      const dataWithIds = data.map(item => ({
+        ...item,
+        id: genUniqueId(),
+      }))
+
+      setFilteredData(dataWithIds)
+
+
+      const columnsFromData: Columns = {}
+      Object.keys(data[0]).forEach(key => {
+        columnsFromData[key] = camelToTitle(key)
+      })
+      setColumns(columnsFromData)
     }
+
   }, [data])
 
-  if (error) return <p>There is an error.</p> // TODO #9 create Error component
+  if (error) return <p>There is an error: {error.message}</p> // TODO #9 create Error component
   if (!data) return <p>Loading...</p> // TODO #8 create Loading component
 
   const handleSearch = (searchQuery: string) => {
@@ -113,7 +118,6 @@ const App = () => {
     })
   }
 
-  const rowsPerPage = 20
   const totalPages = Math.ceil(filteredData.length / rowsPerPage)
 
   const handleNextPage = () => {
@@ -140,7 +144,7 @@ const App = () => {
     setSelectedRows((prevSelectedRows) =>
       prevSelectedRows.length === filteredData.length
         ? []
-        : filteredData.map((item) => item.customerID.toString()),
+        : filteredData.map((item) => item.id.toString()),
     )
   }
 
@@ -174,6 +178,7 @@ const App = () => {
         selectedRows={selectedRows}
         onSelectRow={handleSelectRow}
         onSelectAllRows={handleSelectAllRows}
+        rowsPerPage={rowsPerPage}
       />
 
       <div className='pagination'>
@@ -186,8 +191,8 @@ const App = () => {
           <span>Prev</span>
         </button>
         <div className='page-number'>
-          {currentPage * 20 + 1}-
-          {Math.min((currentPage + 1) * 20, filteredData.length)} of{' '}
+          {currentPage * rowsPerPage + 1}-
+          {Math.min((currentPage + 1) * rowsPerPage, filteredData.length)} of{' '}
           {filteredData.length}
         </div>
         <button className='pagination-btn next' onClick={handleNextPage} disabled={currentPage >= totalPages - 1}>

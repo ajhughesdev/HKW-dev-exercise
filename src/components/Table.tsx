@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 
 import { Columns, DataItem, SortState } from './../types'
+import renderCell from './../utilities/utilities.tsx'
 import { ReactComponent as SortIcon } from './../assets/sort-icon.svg'
 
 interface TableProps {
@@ -13,6 +14,7 @@ interface TableProps {
   selectedRows: string[]
   onSelectRow: (selectedId: string) => void
   onSelectAllRows: () => void
+  rowsPerPage: number
 }
 
 const Table = ({
@@ -25,9 +27,11 @@ const Table = ({
   selectedRows,
   onSelectRow,
   onSelectAllRows,
+  rowsPerPage
 }: TableProps) => {
   const sortedData = useMemo(() => {
     let sortableItems = [...data]
+
     if (sortState.column) {
       sortableItems.sort((a, b) => {
         if (sortState.column && a[sortState.column] < b[sortState.column]) {
@@ -43,12 +47,15 @@ const Table = ({
   }, [data, sortState])
 
   const currentPageData = sortedData.slice(
-    currentPage * 20,
-    (currentPage + 1) * 20,
+    currentPage * rowsPerPage,
+    (currentPage + 1) * rowsPerPage,
   )
 
   return (
     <div className='wrapper'>
+
+      {Object.keys(columns).length === 0 && <div>Loading...</div>}
+
       <table border={0} cellPadding={0} cellSpacing={0} width='100%' className='report'>
 
         <thead className='fixed-header'>
@@ -80,27 +87,17 @@ const Table = ({
 
         <tbody>
           {currentPageData.map((item) => (
-            <tr key={item.customerID}>
+            <tr key={item.id}>
               <td className='checkbox'>
                 <input
                   type='checkbox'
-                  onChange={() => onSelectRow(item.customerID.toString())}
-                  checked={selectedRows.includes(item.customerID.toString())}
+                  onChange={() => onSelectRow(item.id.toString())}
+                  checked={selectedRows.includes(item.id.toString())}
                 />
               </td>
               {Object.entries(columns).map(([key]) => {
                 if (!hiddenColumns.includes(key)) {
-                  if (key === 'clubMember') {
-                    return <td key={key}>{item[key] ? 'Yes' : 'No'}</td>
-                  }
-                  if (key === 'date') {
-                    const date = new Date(item[key])
-                    return <td key={key}>{date.toLocaleDateString()}</td>
-                  }
-                  if (key === 'email') {
-                    return <td key={key}><a href={`mailto:${item[key]}`} className='email'>Send email</a></td>
-                  }
-                  return <td key={key}>{item[key]}</td>
+                  return <td key={key}>{renderCell(item[key], key)}</td>
                 }
                 return null
               })}
@@ -108,8 +105,9 @@ const Table = ({
           ))}
         </tbody>
       </table>
-    </div >
+    </div>
   )
 }
+
 
 export default Table
