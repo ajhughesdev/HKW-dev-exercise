@@ -8,7 +8,7 @@ import SearchBar from './components/SearchBar'
 import ColumnToggler from './components/ColumnToggler'
 import Table from './components/Table'
 
-const url = '/mock_data.json'
+const url = 'https://ajhughesdev.github.io/HKW-dev-exercise/mock_data.json'
 const rowsPerPage = 20
 
 const App = () => {
