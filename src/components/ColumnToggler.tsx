@@ -35,7 +35,7 @@ const ColumnToggler = ({
         aria-label='Column Settings'
       >
         <ColumnSettingsIcon width={20} />
-        <h3> Column Settings</h3>
+        <h3>Column Settings</h3>
       </button>
       <div className='column-toggler'>
         <div className='column-toggler-header'>

@@ -6,13 +6,13 @@
   width: 100%;
   min-height: rem-calc(600, 16);
   overflow: auto;
-  margin-inline-start: rem-calc(40, 16);
   font-weight: 400;
   font-size: rem-calc(13, 16);
+  margin-inline: rem-calc(16, 16);
   color: $gray-500;
 
-  @media screen and (max-width: 640px) {
-    margin-inline: 1rem;
+  @media screen and (min-width: rem-calc(640, 16)) {
+    margin-inline: rem-calc(40, 16);
   }
 
   & .report {
@@ -37,7 +37,7 @@
         width: 100%;
 
         & .table-header-cell {
-          gap: 0.5rem;
+          gap: rem-calc(8, 16);
           cursor: pointer;
         }
       }
@@ -48,8 +48,25 @@
     width: 100%;
     display: block;
 
-    & .table-body-row:nth-child(even) {
-      background-color: $gray-100;
+    & .table-body-row {
+      flex-direction: column;
+      align-items: baseline;
+
+      @media screen and (min-width: rem-calc(640, 16)) {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      &:nth-child(even) {
+        background-color: $gray-100;
+      }
+    }
+
+    & .table-body-cell:not(.checkbox) {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border-bottom: rem-calc(1, 16) solid #ddd;
     }
   }
 }
@@ -58,7 +75,7 @@
 .table-body-row {
   display: flex;
   align-items: center;
-  height: 2.5rem;
+  height: rem-calc(40, 16);
 }
 
 .checkbox {
@@ -69,28 +86,34 @@
 .table-body-cell {
   @include text-crop;
   font-size: $crop-font-size;
-
   display: flex;
   align-items: center;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin: 0;
+
+  @media screen and (min-width: rem-calc(640, 16)) {
+    padding: rem-calc(12 12 12 12, 16);
+  }
 
   &:not(.checkbox) {
-    padding: rem-calc(12 12 12 16, 16);
     width: rem-calc(233, 16);
+    padding: rem-calc(12 12 12 12, 16);
+    display: none;
 
-    @media screen and (max-width: 640px) {
-      padding: rem-calc(12 12 12 12, 16);
+    @media screen and (min-width: rem-calc(640, 16)) {
+      padding: rem-calc(12 12 12 16, 16);
+      display: flex;
     }
   }
 
   &:nth-child(2) {
-    padding: rem-calc(12 12 12 0, 16);
     width: rem-calc(193, 16);
+    padding: rem-calc(12 12 12 12, 16);
 
-    @media screen and (max-width: 640px) {
-      padding: rem-calc(12 12 12 12, 16);
+    @media screen and (min-width: rem-calc(640, 16)) {
+      padding: rem-calc(12 12 12 0, 16);
     }
   }
 }
@@ -103,46 +126,28 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 640px) {
-  .table-row {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    box-sizing: border-box;
-    height: auto;
-  }
+.table-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  height: auto;
 
-  .table-header-cell,
-  .table-body-cell {
-    min-width: calc(
-      375px - 2rem
-    ) !important; /* override other width specifications */
-    margin: 0;
-  }
-
-  /* Hide all table cells except the first one in each row */
-  .table-header-cell:not(.checkbox) {
-    display: none;
-  }
-
-  .table-body-row {
-    flex-direction: column;
-    align-items: baseline;
-  }
-
-  .table-body-cell:not(.checkbox) {
-    display: flex;
-    justify-content: space-between;
+  @media screen and (min-width: rem-calc(640, 16)) {
+    flex-direction: row;
     align-items: center;
-    width: 100%;
-    // padding: 1rem 2rem 2rem 12px;
-    border-bottom: 1px solid #ddd;
+    height: rem-calc(40, 16);
   }
+}
 
-  .table-body-cell:not(.checkbox):before {
-    content: attr(data-label);
-    flex-basis: 50%;
-    text-align: left;
-    font-weight: bold;
+.table-body-cell:not(.checkbox):before {
+  content: attr(data-label);
+  flex-basis: 50%;
+  text-align: left;
+  font-weight: bold;
+
+  @media screen and (min-width: rem-calc(640, 16)) {
+    content: '';
+    flex-basis: 0;
   }
 }

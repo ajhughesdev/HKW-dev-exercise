@@ -10,6 +10,7 @@ import Table from './components/Table'
 
 const url = 'https://ajhughesdev.github.io/HKW-dev-exercise/mock_data.json'
 const rowsPerPage = 20
+const user = 'Steve'
 
 const App = () => {
   const { data, error } = useFetch<DataItem[]>(url)
@@ -20,6 +21,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState<number>(0)
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [searchTags, setSearchTags] = useState<string[]>([])
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true)
 
   useEffect(() => {
     if (data) {
@@ -29,8 +31,7 @@ const App = () => {
       }))
 
       setFilteredData(dataWithIds)
-
-
+      
       const columnsFromData: Columns = {}
       Object.keys(data[0]).forEach(key => {
         columnsFromData[key] = camelToTitle(key)
@@ -47,7 +48,6 @@ const App = () => {
     const trimmedSearchQuery = searchQuery.trim()
     setSearchTags((prevSearchTags) => {
       if (prevSearchTags.includes(trimmedSearchQuery)) {
-        // If the search query already exists in the tags, do nothing
         return prevSearchTags
       }
       const newSearchTags = [...prevSearchTags, trimmedSearchQuery]
@@ -151,7 +151,7 @@ const App = () => {
   return (
     <>
       <div className='header'>
-        <h1>Hi, Steve</h1>
+        <h1>Hi, {isLoggedIn ? user : 'Guest'}</h1>
         <div className='navbar'>
           <div>
             <SearchBar onSearch={handleSearch} searchTags={searchTags} onRemoveSearchTag={(index: string) => handleRemoveSearchTag(index)} />
