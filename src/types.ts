@@ -2,6 +2,7 @@ export interface DataItem {
   [key: string]: any
 }
 
+// Sort typings
 export type SortDirection = 'ascending' | 'descending' | null
 
 export interface SortState {

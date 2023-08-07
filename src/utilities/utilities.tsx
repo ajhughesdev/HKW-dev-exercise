@@ -47,5 +47,4 @@ export const genUniqueId = () => {
 
 export const camelToTitle = (camelCase: string) => {
   return camelCase.replace(/([a-z])(?=[A-Z])/g, '$1 ').replace(/^./, (str) => str.toUpperCase())
-
 }
