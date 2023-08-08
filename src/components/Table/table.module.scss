@@ -122,18 +122,18 @@
         }
       }
     }
+
+    [data-label='Customer ID'],
+    .email:hover {
+      text-decoration: underline;
+      text-decoration-line: underline;
+      text-underline-offset: 0.125rem;
+      cursor: pointer;
+    }
+
+    [data-label='Customer ID']:hover,
+    .email:hover {
+      color: $accent-color-primary;
+    }
   }
-}
-
-.customer-id,
-.email:hover {
-  text-decoration: underline;
-  text-decoration-line: underline;
-  text-underline-offset: 0.125rem;
-  cursor: pointer;
-}
-
-.email:hover,
-.customer-id:hover {
-  color: $accent-color-primary;
 }
