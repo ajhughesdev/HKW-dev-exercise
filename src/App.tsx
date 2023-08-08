@@ -33,7 +33,7 @@ const App = () => {
       setFilteredData(dataWithIds)
 
       const columnsFromData: Columns = {}
-      Object.keys(data[0]).forEach((key) => {
+      Object.keys(dataWithIds[0]).forEach((key) => {
         columnsFromData[key] = camelToTitle(key)
       })
       setColumns(columnsFromData)
@@ -50,15 +50,16 @@ const App = () => {
         return prevSearchTags
       }
       const newSearchTags = [...prevSearchTags, trimmedSearchQuery]
-      setFilteredData(
-        data.filter((item) =>
+      const filteredDataWithIds = data
+        .filter((item) =>
           newSearchTags.some((tag) =>
             Object.values(item).some((value) =>
               value.toString().toLowerCase().includes(tag.toLowerCase()),
             ),
           ),
-        ),
-      )
+        )
+        .map((item) => ({ ...item, id: genUniqueId() }))
+      setFilteredData(filteredDataWithIds)
       return newSearchTags
     })
     setCurrentPage(0)
@@ -78,7 +79,7 @@ const App = () => {
           ),
         )
       } else {
-        setFilteredData(data)
+        setFilteredData(data.map((item) => ({ ...item, id: genUniqueId() })))
       }
       return newSearchTags
     })

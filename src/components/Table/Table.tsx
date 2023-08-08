@@ -28,10 +28,9 @@ const Table = ({
   selectedRows,
   onSelectRow,
   onSelectAllRows,
-  rowsPerPage
+  rowsPerPage,
 }: TableProps) => {
   const sortedData = useMemo(() => {
-
     let sortableItems = [...data]
 
     if (sortState.column) {
@@ -48,10 +47,9 @@ const Table = ({
     return sortableItems
   }, [data, sortState])
 
-
   const currentPageData = sortedData.slice(
     currentPage * rowsPerPage,
-    (currentPage + 1) * rowsPerPage,
+    (currentPage + 1) * rowsPerPage
   )
 
   return (
@@ -75,27 +73,24 @@ const Table = ({
               />
             </th>
             {Object.entries(columns).map(([key, value]) =>
-              !hiddenColumns.includes(key) ? (
-                <th
-                  key={key}
-                  onClick={() => onSort(key)}
-                >
-                  <span>
-                    {value}
-                    <SortIcon width={12} height={12} />
-                  </span>
-                </th>
-              ) : null
+              !hiddenColumns.includes(key)
+                &&
+                key !== 'id'
+                ? (
+                  <th key={key} onClick={() => onSort(key)}>
+                    <span>
+                      {value}
+                      <SortIcon width={12} height={12} />
+                    </span>
+                  </th>
+                ) : null
             )}
-            <th className={css['last-column']}></th>
           </tr>
         </thead>
 
         <tbody>
           {currentPageData.map((item) => (
-            <tr
-              key={item.id}
-            >
+            <tr key={item.id}>
               <td className={css.checkbox}>
                 <input
                   type='checkbox'
@@ -103,25 +98,22 @@ const Table = ({
                   checked={selectedRows.includes(item.id)}
                 />
               </td>
-              {Object.entries(columns).map(([key, value]) => {
-                if (!hiddenColumns.includes(key)) {
-                  return (
-                    <td
-                      data-label={value}
-                      key={key}
-                    >
+              {Object.entries(columns).map(([key, value]) =>
+                !hiddenColumns.includes(key)
+                  &&
+                  key !== 'id'
+                  ? (
+                    <td data-label={value} key={key}>
                       {renderCell(item[key], key)}
                     </td>
-                  )
-                }
-                return null
-              })}
-              <td className={css['last-column']}></td>
+                  ) : null
+              )}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+    // </div>
   )
 }
 

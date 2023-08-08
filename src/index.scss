@@ -31,9 +31,7 @@
   height: 100dvh;
   max-width: 100%;
   position: relative;
-
   overscroll-behavior: none;
-  // position: absolute;
 
   font-family: $body-font-family;
   font-synthesis: none;
@@ -117,7 +115,6 @@ input[type='checkbox'] {
   height: 20px;
   background-image: url('./assets/checkbox.svg');
   background-size: 20px;
-  // position: relative;
   display: grid;
   place-content: center;
   cursor: pointer;
@@ -131,13 +128,11 @@ input[type='checkbox']::before {
   transform-origin: center;
   transform: scale(0);
   transition: 120ms transform linear;
-  // border-radius: 1.5px;
-  // border: 1px inset solid $gray-100;
 }
 
 input[type='checkbox']:checked::before {
   transform: scale(1);
-  background-image: url('./assets/check2.svg');
+  background-image: url('./assets/check.svg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
@@ -156,7 +151,6 @@ input[type='checkbox']:checked::before {
   padding-inline: 0;
   background: $white;
   border-top: 0.0625rem solid $gray-300;
-  bottom: 0;
 
   @media screen and (min-width: 40rem) {
     position: relative;
