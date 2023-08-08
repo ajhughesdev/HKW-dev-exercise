@@ -1,135 +1,126 @@
-@import './../../index';
+@import './../../styles/variables';
 
-.report-wrapper {
-  display: block;
-  position: relative;
-  width: 100%;
-  min-height: rem-calc(600, 16);
-  overflow: auto;
-  font-weight: 400;
-  font-size: rem-calc(13, 16);
-  margin-inline: rem-calc(16, 16);
-  color: $gray-500;
+@media screen and (min-width: 40rem) {
+  .report-wrapper {
+    position: relative;
+    box-sizing: border-box;
+    overflow: scroll;
+    max-width: 100%;
+    margin-inline-start: 2.5rem;
+    height: 600px;
+    font-size: 0.8125rem;
 
-  @media screen and (min-width: rem-calc(640, 16)) {
-    margin-inline: rem-calc(40, 16);
-  }
+    &::-webkit-scrollbar {
+      background-color: $scroll-bar-bg;
+      height: 0.125rem;
+      width: 100%;
+      border-radius: 0;
+      padding-inline-end: 40px;
+    }
 
-  & .report {
-    display: block;
-    position: absolute;
-    scrollbar-width: thin;
+    &::-webkit-scrollbar-thumb {
+      background-color: $scroll-bar;
+      width: 40%;
+    }
 
-    & thead {
-      position: sticky;
-      will-change: transform;
-      background-color: $gray-100;
-      font-weight: 700;
-      letter-spacing: rem-calc(0.64, 16);
-      z-index: 1;
-      text-transform: uppercase;
-      top: 0;
-      left: 0;
+    .report {
+      table-layout: fixed;
+      margin-inline-end: 2.5rem;
+      background: repeating-linear-gradient(
+        to bottom,
+        $gray-100,
+        $gray-100 40px,
+        $white 40px,
+        $white 80px
+      );
 
-      & .table-header-row {
+      tr {
         display: flex;
         align-items: center;
-        width: 100%;
+        padding-block: 10px;
+      }
 
-        & .table-header-cell {
+      thead {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: $gray-100;
+        font-weight: 700;
+        text-transform: uppercase;
+
+        th {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
           cursor: pointer;
+          background: $gray-100;
 
-          & span {
+          &:first-child {
+            position: sticky;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            background: $gray-100;
+            width: 40px;
+            padding-inline: 12px 8px;
+          }
+
+          &:nth-child(2) {
+            width: 193px;
+            padding-inline-start: 0;
+          }
+
+          &:not(:first-child):not(:nth-child(2)) {
+            width: 233px;
+            padding-inline: 1rem;
+          }
+
+          span {
             display: flex;
-            gap: rem-calc(8, 16);
+            gap: 8px;
             translate: 0 1px;
 
-            &:active,
-            &:focus {
-              outline: 1px solid $accent-color-primary;
-              padding: 3px;
-              border-radius: 2px;
-            }
-
-            & svg {
+            svg {
               translate: 0 1px;
             }
           }
         }
       }
-    }
-  }
 
-  & tbody {
-    width: 100%;
-    display: block;
+      tbody {
+        tr:nth-child(even) {
+          background: $gray-100;
+        }
 
-    & .table-body-row {
-      flex-direction: column;
-      align-items: baseline;
+        tr:nth-child(odd) {
+          background: $white;
+        }
 
-      @media screen and (min-width: rem-calc(640, 16)) {
-        flex-direction: row;
-        align-items: center;
+        td {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &:first-child {
+            position: sticky;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            background: inherit;
+            width: 40px;
+            padding-inline: 12px 8px;
+          }
+
+          &:nth-child(2) {
+            width: 193px;
+          }
+
+          &:not(:first-child):not(:nth-child(2)) {
+            width: 233px;
+            padding-inline: 1rem;
+          }
+        }
       }
-
-      &:nth-child(even) {
-        background-color: $gray-100;
-      }
-    }
-
-    & .table-body-cell:not(.checkbox) {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      border-bottom: rem-calc(1, 16) solid #ddd;
-    }
-  }
-}
-
-.table-header-row,
-.table-body-row {
-  display: flex;
-  align-items: center;
-  height: rem-calc(40, 16);
-}
-
-.checkbox {
-  padding: rem-calc(12 8 12 12, 16);
-}
-
-.table-header-cell,
-.table-body-cell {
-  @include text-crop;
-  font-size: $crop-font-size;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin: 0;
-
-  @media screen and (min-width: rem-calc(640, 16)) {
-    padding: rem-calc(12 12 12 12, 16);
-  }
-
-  &:not(.checkbox) {
-    width: rem-calc(233, 16);
-    padding: rem-calc(12 12 12 12, 16);
-    display: none;
-
-    @media screen and (min-width: rem-calc(640, 16)) {
-      padding: rem-calc(12 12 12 16, 16);
-      display: flex;
-    }
-  }
-
-  &:nth-child(2) {
-    width: rem-calc(193, 16);
-    padding: rem-calc(12 12 12 12, 16);
-
-    @media screen and (min-width: rem-calc(640, 16)) {
-      padding: rem-calc(12 12 12 1, 16);
     }
   }
 }
@@ -138,37 +129,11 @@
 .email:hover {
   text-decoration: underline;
   text-decoration-line: underline;
-  text-underline-offset: rem-calc(2, 16);
+  text-underline-offset: 0.125rem;
   cursor: pointer;
 }
 
 .email:hover,
 .customer-id:hover {
   color: $accent-color-primary;
-}
-
-.table-row {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  box-sizing: border-box;
-  height: auto;
-
-  @media screen and (min-width: rem-calc(640, 16)) {
-    flex-direction: row;
-    align-items: center;
-    height: rem-calc(40, 16);
-  }
-}
-
-.table-body-cell:not(.checkbox):before {
-  content: attr(data-label);
-  flex-basis: 50%;
-  text-align: left;
-  font-weight: bold;
-
-  @media screen and (min-width: rem-calc(640, 16)) {
-    content: '';
-    flex-basis: 0;
-  }
 }

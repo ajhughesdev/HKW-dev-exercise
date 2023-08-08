@@ -15,7 +15,7 @@ export default function renderCell(value: any, key: string) {
     return ''
   }
 
-  if (typeof value === 'number') {
+  if (lowerCaseKey.includes('customer-id')) {
     return <button className={css['customer-id']}>{value.toString()}</button>
   }
 
@@ -29,11 +29,11 @@ export default function renderCell(value: any, key: string) {
   }
 
   if (lowerCaseKey.includes('phone')) {
-    return <a href={`tel:${value}`} className={css.phone}>Call</a>
+    return <a href={`tel:${value}`}>Call</a>
   }
 
   if (lowerCaseKey.includes('url') || lowerCaseKey.includes('href') || lowerCaseKey.includes('link')) {
-    return <a href={value} className={css.url}>{value}</a>
+    return <a href={value}>{value}</a>
   }
 
   return value
@@ -47,5 +47,4 @@ export const genUniqueId = () => {
 
 export const camelToTitle = (camelCase: string) => {
   return camelCase.replace(/([a-z])(?=[A-Z])/g, '$1 ').replace(/^./, (str) => str.toUpperCase())
-
 }

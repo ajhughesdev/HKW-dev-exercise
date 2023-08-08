@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { camelToTitle, genUniqueId } from './utilities/utilities'
 import { Columns, DataItem, SortDirection, SortState } from './types'
-import { useFetch } from './utilities/hooks/useFetch'
+import { useFetch } from './hooks/useFetch'
 
 import SearchBar from './components/SearchBar/SearchBar'
 import ColumnToggler from './components/ColumnToggler/ColumnToggler'
@@ -21,11 +21,11 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState<number>(0)
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [searchTags, setSearchTags] = useState<string[]>([])
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true)
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
 
   useEffect(() => {
     if (data) {
-      const dataWithIds = data.map(item => ({
+      const dataWithIds = data.map((item) => ({
         ...item,
         id: genUniqueId(),
       }))
@@ -33,12 +33,11 @@ const App = () => {
       setFilteredData(dataWithIds)
 
       const columnsFromData: Columns = {}
-      Object.keys(data[0]).forEach(key => {
+      Object.keys(dataWithIds[0]).forEach((key) => {
         columnsFromData[key] = camelToTitle(key)
       })
       setColumns(columnsFromData)
     }
-
   }, [data])
 
   if (error) return <p>There is an error: {error.message}</p> // TODO #9 create Error component
@@ -51,15 +50,16 @@ const App = () => {
         return prevSearchTags
       }
       const newSearchTags = [...prevSearchTags, trimmedSearchQuery]
-      setFilteredData(
-        data.filter((item) =>
+      const filteredDataWithIds = data
+        .filter((item) =>
           newSearchTags.some((tag) =>
             Object.values(item).some((value) =>
-              value.toString().toLowerCase().includes(tag.toLowerCase())
-            )
-          )
+              value.toString().toLowerCase().includes(tag.toLowerCase()),
+            ),
+          ),
         )
-      )
+        .map((item) => ({ ...item, id: genUniqueId() }))
+      setFilteredData(filteredDataWithIds)
       return newSearchTags
     })
     setCurrentPage(0)
@@ -73,13 +73,13 @@ const App = () => {
           data.filter((item) =>
             newSearchTags.some((tag) =>
               Object.values(item).some((value) =>
-                value.toString().toLowerCase().includes(tag.toLowerCase())
-              )
-            )
-          )
+                value.toString().toLowerCase().includes(tag.toLowerCase()),
+              ),
+            ),
+          ),
         )
       } else {
-        setFilteredData(data)
+        setFilteredData(data.map((item) => ({ ...item, id: genUniqueId() })))
       }
       return newSearchTags
     })
@@ -96,7 +96,7 @@ const App = () => {
   }
 
   const handleToggleAllColumns = () => {
-    setHiddenColumns(prevHiddenColumns => {
+    setHiddenColumns((prevHiddenColumns) => {
       if (prevHiddenColumns.length === 0) {
         return Object.keys(columns).map((key) => key)
       } else {
@@ -152,9 +152,16 @@ const App = () => {
     <>
       <div className='header'>
         <h1>Hi, {isLoggedIn ? user : 'Guest'}</h1>
+        <h2>Report</h2>
         <div className='navbar'>
           <div>
-            <SearchBar onSearch={handleSearch} searchTags={searchTags} onRemoveSearchTag={(index: string) => handleRemoveSearchTag(index)} />
+            <SearchBar
+              onSearch={handleSearch}
+              searchTags={searchTags}
+              onRemoveSearchTag={(index: string) =>
+                handleRemoveSearchTag(index)
+              }
+            />
           </div>
           <div>
             <ColumnToggler
@@ -180,12 +187,26 @@ const App = () => {
         onSelectAllRows={handleSelectAllRows}
         rowsPerPage={rowsPerPage}
       />
-
       <div className='pagination'>
-        <button onClick={handlePreviousPage} disabled={currentPage === 0} className='pagination-btn'>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className='page-btn'>
-            <g id="Frame">
-              <path id="Vector" d="M8 12L14 6V18L8 12Z" fill="#151718" />
+        <button
+          onClick={handlePreviousPage}
+          disabled={currentPage === 0}
+          className='pagination-btn'
+        >
+          <svg
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+            className='page-btn'
+          >
+            <g id='Frame'>
+              <path
+                id='Vector'
+                d='M8 12L14 6V18L8 12Z'
+                fill='#151718'
+              />
             </g>
           </svg>
           <span>Prev</span>
@@ -195,13 +216,28 @@ const App = () => {
           {Math.min((currentPage + 1) * rowsPerPage, filteredData.length)} of{' '}
           {filteredData.length}
         </div>
-        <button className='pagination-btn next' onClick={handleNextPage} disabled={currentPage >= totalPages - 1}>
+        <button
+          className='pagination-btn next'
+          onClick={handleNextPage}
+          disabled={currentPage >= totalPages - 1}
+        >
           <span>Next</span>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g id="Frame">
-              <path id="Vector" d="M8 12L14 6V18L8 12Z" fill="#151718" />
+          <svg
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <g id='Frame'>
+              <path
+                id='Vector'
+                d='M8 12L14 6V18L8 12Z'
+                fill='#151718'
+              />
             </g>
-          </svg></button>
+          </svg>
+        </button>
       </div>
     </>
   )

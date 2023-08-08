@@ -2,42 +2,43 @@
 
 .search-bar {
   @include text-crop;
-  font-size: rem-calc(16, 16);
+  font-size: 1rem;
   background: #ffffff
     url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9IkZyYW1lIj4KPHBhdGggaWQ9IlZlY3RvciIgZD0iTTE1LjAyNTggMTMuODQ3NEwxOC41OTQ3IDE3LjQxNjNMMTcuNDE2MiAxOC41OTQ4TDEzLjg0NzMgMTUuMDI1OUMxMi41NjQgMTYuMDUyNSAxMC45MzY2IDE2LjY2NjcgOS4xNjY2MyAxNi42NjY3QzUuMDI2NjMgMTYuNjY2NyAxLjY2NjYzIDEzLjMwNjcgMS42NjY2MyA5LjE2NjY5QzEuNjY2NjMgNS4wMjY2OSA1LjAyNjYzIDEuNjY2NjkgOS4xNjY2MyAxLjY2NjY5QzEzLjMwNjYgMS42NjY2OSAxNi42NjY2IDUuMDI2NjkgMTYuNjY2NiA5LjE2NjY5QzE2LjY2NjYgMTAuOTM2NyAxNi4wNTI1IDEyLjU2NDEgMTUuMDI1OCAxMy44NDc0Wk0xMy4zNTM5IDEzLjIyOUMxNC4zNzI5IDEyLjE3ODkgMTUgMTAuNzQ2NCAxNSA5LjE2NjY5QzE1IDUuOTQzNzcgMTIuMzg5NSAzLjMzMzM1IDkuMTY2NjMgMy4zMzMzNUM1Ljk0MzcxIDMuMzMzMzUgMy4zMzMyOSA1Ljk0Mzc3IDMuMzMzMjkgOS4xNjY2OUMzLjMzMzI5IDEyLjM4OTYgNS45NDM3MSAxNSA5LjE2NjYzIDE1QzEwLjc0NjMgMTUgMTIuMTc4OCAxNC4zNzI5IDEzLjIyOSAxMy4zNTM5TDEzLjM1MzkgMTMuMjI5WiIgZmlsbD0iIzUzNTU1NyIvPgo8L2c+Cjwvc3ZnPgo=)
-    no-repeat center left rem-calc(12, 16);
-  padding: rem-calc(10, 16) rem-calc(12, 16) rem-calc(10, 16) rem-calc(40, 16);
+    no-repeat center left 0.75rem;
+  padding: 0.625rem 0.75rem 0.625rem 2.5rem;
   display: flex;
   align-items: center;
-  border: rem-calc(1, 16) solid $gray-300;
-  width: rem-calc(192, 16);
-  margin-block-start: rem-calc(12, 16);
+  border: 0.0625rem solid $gray-300;
+  width: 12rem;
+  margin-block-start: 0.75rem;
   flex: 1 1 0;
 
-  &:active, &:focus {
-    outline: 1px solid $accent-color-primary;
+  &:active,
+  &:focus {
+    outline: 0.0625rem solid $accent-color-primary;
 
-    border-radius: 2px;
+    border-radius: 0.125rem;
   }
 
-  @media screen and (min-width: 640px) {
-    width: rem-calc(233, 16);
+  @media screen and (min-width: 40rem) {
+    width: 14.5625rem;
   }
 
   &::placeholder {
     color: $gray-300;
-    font-size: rem-calc(16, 16);
+    font-size: 1rem;
     line-height: normal;
   }
 }
 
 .search-tags.empty {
-  margin-block-start: rem-calc(20, 16);
+  margin-block-start: 1.25rem;
 }
 
 .search-tags {
-  margin-block-start: rem-calc(16, 16);
-  max-height: rem-calc(40, 16);
+  margin-block-start: 1rem;
+  max-height: 2.5rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
@@ -46,20 +47,20 @@
 
 .search-tag {
   display: flex;
-  border-radius: rem-calc(48, 16);
+  border-radius: 3rem;
   background-color: $gray-100;
   color: $gray-400;
-  font-size: rem-calc(16, 16);
-  line-height: rem-calc(20, 16);
-  margin-block-end: rem-calc(12, 16);
+  font-size: 1rem;
+  line-height: 1.25rem;
+  margin-block-end: 0.75rem;
   align-items: center;
-  padding: rem-calc(8, 16);
-  gap: rem-calc(8, 16);
+  padding: 0.5rem;
+  gap: 0.5rem;
 
   & button {
     display: block;
-    height: rem-calc(20, 16);
-    width: rem-calc(20, 16);
+    height: 1.25rem;
+    width: 1.25rem;
     cursor: pointer;
 
     &:hover {

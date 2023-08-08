@@ -13,21 +13,15 @@ type Action<T> =
   | { type: 'fetched'; payload: T }
   | { type: 'error'; payload: Error }
 
-export function useFetch<T = unknown>(
-  url?: string,
-  options?: RequestInit,
-): State<T> {
-  const cache = useRef<Cache<T>>({})
-
-  // Used to prevent state update if the component is unmounted
-  const cancelRequest = useRef<boolean>(false)
+export function useFetch<T>(url?: string, options?: RequestInit): State<T> {
+  const cacheRef = useRef<Cache<T>>({})
+  const cancelRequestRef = useRef<boolean>(false)
 
   const initialState: State<T> = {
     error: undefined,
     data: undefined,
   }
 
-  // Keep state logic separated
   const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
       case 'loading':
@@ -44,17 +38,15 @@ export function useFetch<T = unknown>(
   const [state, dispatch] = useReducer(fetchReducer, initialState)
 
   useEffect(() => {
-    // Do nothing if the url is not given
     if (!url) return
 
-    cancelRequest.current = false
+    cancelRequestRef.current = false
 
     const fetchData = async () => {
       dispatch({ type: 'loading' })
 
-      // If a cache exists for this url, return it
-      if (cache.current[url]) {
-        dispatch({ type: 'fetched', payload: cache.current[url] })
+      if (cacheRef.current[url]) {
+        dispatch({ type: 'fetched', payload: cacheRef.current[url] })
         return
       }
 
@@ -65,24 +57,23 @@ export function useFetch<T = unknown>(
         }
 
         const data = (await response.json()) as T
-        cache.current[url] = data
-        if (cancelRequest.current) return
+        cacheRef.current[url] = data
+
+        if (cancelRequestRef.current) return
 
         dispatch({ type: 'fetched', payload: data })
       } catch (error) {
-        if (cancelRequest.current) return
+        if (cancelRequestRef.current) return
 
         dispatch({ type: 'error', payload: error as Error })
       }
     }
 
-    void fetchData()
+    fetchData()
 
-    // use the cleanup function for avoiding a possible state update after the component was unmounts
     return () => {
-      cancelRequest.current = true
+      cancelRequestRef.current = true
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url])
 
   return state

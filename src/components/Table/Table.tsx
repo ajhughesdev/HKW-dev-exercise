@@ -28,7 +28,7 @@ const Table = ({
   selectedRows,
   onSelectRow,
   onSelectAllRows,
-  rowsPerPage
+  rowsPerPage,
 }: TableProps) => {
   const sortedData = useMemo(() => {
     let sortableItems = [...data]
@@ -49,19 +49,23 @@ const Table = ({
 
   const currentPageData = sortedData.slice(
     currentPage * rowsPerPage,
-    (currentPage + 1) * rowsPerPage,
+    (currentPage + 1) * rowsPerPage
   )
 
   return (
     <div className={css['report-wrapper']}>
-
       {Object.keys(columns).length === 0 && <div>Loading...</div>}
 
-      <table border={0} cellPadding={0} cellSpacing={0} width='100%' className={css.report}>
-
+      <table
+        border={0}
+        cellPadding={0}
+        cellSpacing={0}
+        width='100%'
+        className={css.report}
+      >
         <thead>
-          <tr className={`${css['table-header-row']} ${css['table-row']}`}>
-            <th className={`${css.checkbox} ${css['table-header-cell']}`}>
+          <tr>
+            <th className={css.checkbox}>
               <input
                 type='checkbox'
                 onChange={onSelectAllRows}
@@ -69,48 +73,48 @@ const Table = ({
               />
             </th>
             {Object.entries(columns).map(([key, value]) =>
-              !hiddenColumns.includes(key) ? (
-                <th
-                  className={css['table-header-cell']}
-                  key={key}
-                  onClick={() => onSort(key)}
-                >
-                  <span>
-                    {value}
-                    <SortIcon
-                      width={12}
-                      height={12}
-                    />
-                  </span>
-                </th>
-              ) : null,
+              !hiddenColumns.includes(key)
+                &&
+                key !== 'id'
+                ? (
+                  <th key={key} onClick={() => onSort(key)}>
+                    <span>
+                      {value}
+                      <SortIcon width={12} height={12} />
+                    </span>
+                  </th>
+                ) : null
             )}
           </tr>
         </thead>
 
         <tbody>
           {currentPageData.map((item) => (
-            <tr key={item.id} className={`${css['table-body-row']} ${css['table-row']}`}>
-              <td className={`${css.checkbox} ${css['table-body-cell']}`}>
+            <tr key={item.id}>
+              <td className={css.checkbox}>
                 <input
                   type='checkbox'
                   onChange={() => onSelectRow(item.id)}
                   checked={selectedRows.includes(item.id)}
                 />
               </td>
-              {Object.entries(columns).map(([key, value]) => {
-                if (!hiddenColumns.includes(key)) {
-                  return <td data-label={value} key={key} className={css['table-body-cell']}>{renderCell(item[key], key)}</td>
-                }
-                return null
-              })}
+              {Object.entries(columns).map(([key, value]) =>
+                !hiddenColumns.includes(key)
+                  &&
+                  key !== 'id'
+                  ? (
+                    <td data-label={value} key={key}>
+                      {renderCell(item[key], key)}
+                    </td>
+                  ) : null
+              )}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
+    // </div>
   )
 }
-
 
 export default Table
