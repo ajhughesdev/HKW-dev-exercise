@@ -33,5 +33,24 @@ describe('<App />', () => {
 
     expect(pageNumber.textContent).toBe('21 - 40 of 100')
   })
-})
 
+  it('Search functionality works correctly', () => {
+    // TODO: Implement test for search functionality
+  })
+
+  it('Column toggling functionality works correctly', () => {
+    // TODO: Implement test for column toggling functionality
+  })
+
+  it('Sorting functionality works correctly', () => {
+    // TODO: Implement test for sorting functionality
+  })
+
+  it('Row selection functionality works correctly', () => {
+    // TODO: Implement test for row selection functionality
+  })
+
+  it('Pagination functionality works correctly', () => {
+    // TODO: Implement test for pagination functionality
+  })
+})
