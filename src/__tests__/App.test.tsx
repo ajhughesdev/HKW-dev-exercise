@@ -33,5 +33,40 @@ describe('<App />', () => {
 
     expect(pageNumber.textContent).toBe('21 - 40 of 100')
   })
-})
 
+  it('Searches for a term', () => {
+    const wrapper = render(<App />)
+    const searchBar = wrapper.container.querySelector('input.search-bar') as HTMLInputElement
+
+    fireEvent.change(searchBar, { target: { value: 'test' } })
+
+    expect(wrapper.container.querySelector('div.filtered-data').textContent).toContain('test')
+  })
+
+  it('Toggles a column', () => {
+    const wrapper = render(<App />)
+    const columnToggler = wrapper.container.querySelector('button.column-toggler') as HTMLButtonElement
+
+    fireEvent.click(columnToggler)
+
+    expect(wrapper.container.querySelector('div.hidden-columns').textContent).toContain('column-name')
+  })
+
+  it('Sorts a column', () => {
+    const wrapper = render(<App />)
+    const columnHeader = wrapper.container.querySelector('th.column-header') as HTMLTableHeaderCellElement
+
+    fireEvent.click(columnHeader)
+
+    expect(wrapper.container.querySelector('div.sort-state').textContent).toBe('column-name ascending')
+  })
+
+  it('Selects a row', () => {
+    const wrapper = render(<App />)
+    const rowCheckbox = wrapper.container.querySelector('input.row-checkbox') as HTMLInputElement
+
+    fireEvent.click(rowCheckbox)
+
+    expect(wrapper.container.querySelector('div.selected-rows').textContent).toContain('row-id')
+  })
+})
