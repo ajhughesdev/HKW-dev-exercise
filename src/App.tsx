@@ -31,6 +31,7 @@ const App = () => {
       }))
 
       setFilteredData(dataWithIds)
+      setIsLoggedIn(true)
 
       const columnsFromData: Columns = {}
       Object.keys(dataWithIds[0]).forEach((key) => {
@@ -38,7 +39,7 @@ const App = () => {
       })
       setColumns(columnsFromData)
     }
-  }, [data])
+  }, [data, setColumns])
 
   if (error) return <p>There is an error: {error.message}</p> // TODO #9 create Error component
   if (!data) return <p>Loading...</p> // TODO #8 create Loading component
