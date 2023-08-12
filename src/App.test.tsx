@@ -4,7 +4,16 @@ import App from './App';
 
 // Mock data for testing
 const mockData = [
-  // Add the data you want to use for testing
+  {
+    "customerID": 96757,
+    "fullName": "Cohen, Jamie",
+    "date": "2011-05-02T02:20:07",
+    "orderNumber": "wqI5QgGo",
+    "email": "becksarah@king-johnson.biz",
+    "orderStatus": "shipped",
+    "clubMember": true,
+    "location": "East Jenniferchester, NH"
+  }
 ];
 
 // Mock the fetch request
@@ -21,7 +30,7 @@ describe('App', () => {
 
     fireEvent.change(searchBar, { target: { value: 'test' } });
 
-    // Add your assertions here
+    expect(searchBar.value).toBe('test');
   });
 
   test('column toggler functionality', () => {
@@ -30,7 +39,8 @@ describe('App', () => {
 
     fireEvent.click(columnToggler);
 
-    // Add your assertions here
+    // Assuming that clicking the column toggler changes its text
+    expect(columnToggler.textContent).toBe('Column Toggler Clicked');
   });
 
   test('row selection functionality', () => {
@@ -39,7 +49,7 @@ describe('App', () => {
 
     fireEvent.click(rowCheckbox);
 
-    // Add your assertions here
+    expect(rowCheckbox.checked).toBe(true);
   });
 
   test('column sorting functionality', () => {
@@ -48,7 +58,8 @@ describe('App', () => {
 
     fireEvent.click(columnHeader);
 
-    // Add your assertions here
+    // Assuming that clicking the column header changes its color
+    expect(columnHeader.style.color).toBe('blue');
   });
 
   test('pagination functionality', () => {
@@ -57,6 +68,7 @@ describe('App', () => {
 
     fireEvent.click(nextPageButton);
 
-    // Add your assertions here
+    // Assuming that clicking the next page button changes its text
+    expect(nextPageButton.textContent).toBe('Page 2');
   });
 });
