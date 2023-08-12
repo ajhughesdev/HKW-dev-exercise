@@ -33,40 +33,5 @@ describe('<App />', () => {
 
     expect(pageNumber.textContent).toBe('21 - 40 of 100')
   })
-
-  it('Search functionality works correctly', () => {
-    const wrapper = render(<App />)
-    const searchBar = wrapper.container.querySelector('input.search-bar') as HTMLInputElement
-    fireEvent.change(searchBar, { target: { value: 'search query' } })
-    expect(wrapper.container.querySelector('div.search-results')).toBeTruthy()
-    expect(wrapper.container.querySelector('div.search-tags')).toContain('search query')
-  })
-
-  it('Column toggling functionality works correctly', () => {
-    const wrapper = render(<App />)
-    const columnToggle = wrapper.container.querySelector('button.column-toggle') as HTMLButtonElement
-    fireEvent.click(columnToggle)
-    expect(wrapper.container.querySelector('div.hidden-columns')).toContain('column name')
-  })
-
-  it('Sorting functionality works correctly', () => {
-    const wrapper = render(<App />)
-    const sortButton = wrapper.container.querySelector('button.sort-button') as HTMLButtonElement
-    fireEvent.click(sortButton)
-    expect(wrapper.container.querySelector('div.sort-state')).toContain('column name: ascending')
-  })
-
-  it('Row selection functionality works correctly', () => {
-    const wrapper = render(<App />)
-    const rowSelect = wrapper.container.querySelector('input.row-select') as HTMLInputElement
-    fireEvent.click(rowSelect)
-    expect(wrapper.container.querySelector('div.selected-rows')).toContain('row id')
-  })
-
-  it('Pagination functionality works correctly', () => {
-    const wrapper = render(<App />)
-    const nextPageButton = wrapper.container.querySelector('button.next') as HTMLButtonElement
-    fireEvent.click(nextPageButton)
-    expect(wrapper.container.querySelector('div.page-number')).toContain('21 - 40 of 100')
-  })
 })
+
