@@ -107,6 +107,14 @@ h2 {
   }
 }
 
+.navbar-left {
+  display: grid;
+  grid-template-areas:
+    'search download';
+  gap: 1rem;
+  align-items: end;
+}
+
 input[type='checkbox'] {
   box-sizing: content-box;
   -webket-appearance: none;
@@ -136,6 +144,27 @@ input[type='checkbox']:checked::before {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
+}
+
+.export-btn.empty {
+  margin-block-start: 1.25rem;
+}
+
+.export-btn {
+  @include text-crop;
+  $crop-line-height: 1;
+  font-size: 1rem;
+  display: inline-flex;
+  padding: 10px 12px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid $gray-300;
+  cursor: pointer;
+  font-family: 'Gibson', sans-serif;
+  font-weight: 500;
+  letter-spacing: -.32px;
+  max-height: 40px;
+  margin-block-start: 0.75rem;
 }
 
 .pagination {

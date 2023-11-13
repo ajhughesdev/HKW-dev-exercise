@@ -1,5 +1,10 @@
 @import './../../index';
 
+.search-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .search-bar {
   @include text-crop;
   font-size: 1rem;
@@ -12,12 +17,12 @@
   border: 0.0625rem solid $gray-300;
   width: 12rem;
   margin-block-start: 0.75rem;
-  flex: 1 1 0;
+  flex: 1 0 0;
+  max-height: 40px;
 
   &:active,
   &:focus {
     outline: 0.0625rem solid $accent-color-primary;
-
     border-radius: 0.125rem;
   }
 
@@ -37,7 +42,7 @@
 }
 
 .search-tags {
-  margin-block-start: 1rem;
+  margin-block: 1rem .75rem;
   max-height: 2.5rem;
   display: flex;
   flex-wrap: wrap;
@@ -52,7 +57,7 @@
   color: $gray-400;
   font-size: 1rem;
   line-height: 1.25rem;
-  margin-block-end: 0.75rem;
+
   align-items: center;
   padding: 0.5rem;
   gap: 0.5rem;

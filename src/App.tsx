@@ -17,7 +17,10 @@ const App = () => {
   const [filteredData, setFilteredData] = useState<DataItem[]>([])
   const [columns, setColumns] = useState<Columns>({})
   const [hiddenColumns, setHiddenColumns] = useState<string[]>([])
-  const [sortState, setSortState] = useState<SortState>({ column: null, direction: null })
+  const [sortState, setSortState] = useState<SortState>({
+    column: null,
+    direction: null,
+  })
   const [currentPage, setCurrentPage] = useState<number>(0)
   const [selectedRows, setSelectedRows] = useState<string[]>([])
   const [searchTags, setSearchTags] = useState<string[]>([])
@@ -55,9 +58,9 @@ const App = () => {
         .filter((item) =>
           newSearchTags.some((tag) =>
             Object.values(item).some((value) =>
-              value.toString().toLowerCase().includes(tag.toLowerCase()),
-            ),
-          ),
+              value.toString().toLowerCase().includes(tag.toLowerCase())
+            )
+          )
         )
         .map((item) => ({ ...item, id: genUniqueId() }))
       setFilteredData(filteredDataWithIds)
@@ -74,10 +77,10 @@ const App = () => {
           data.filter((item) =>
             newSearchTags.some((tag) =>
               Object.values(item).some((value) =>
-                value.toString().toLowerCase().includes(tag.toLowerCase()),
-              ),
-            ),
-          ),
+                value.toString().toLowerCase().includes(tag.toLowerCase())
+              )
+            )
+          )
         )
       } else {
         setFilteredData(data.map((item) => ({ ...item, id: genUniqueId() })))
@@ -145,8 +148,45 @@ const App = () => {
     setSelectedRows((prevSelectedRows) =>
       prevSelectedRows.length === filteredData.length
         ? []
-        : filteredData.map((item) => item.id.toString()),
+        : filteredData.map((item) => item.id.toString())
     )
+  }
+
+  const convertToCSV = (
+    data: DataItem[],
+    excludedColumns: string[] = []
+  ): string => {
+    const replacer = (key: string, value: any) => (value === null ? '' : value)
+    const header = Object.keys(data[0]).filter(
+      (key) => !excludedColumns.includes(key)
+    )
+    const csv = [
+      header.join(','),
+      ...data.map((row) =>
+        header
+          .map((fieldName) => JSON.stringify(row[fieldName], replacer))
+          .join(',')
+      ),
+    ].join('\r\n')
+    return csv
+  }
+
+  const handleExportToCSV = () => {
+    const selectedData = filteredData.filter((row) =>
+      selectedRows.includes(row.id.toString())
+    )
+    const columnsToExclude = ['id', ...hiddenColumns]
+    const csv = convertToCSV(selectedData, columnsToExclude)
+
+    const blob = new Blob([csv], { type: 'text/csv' })
+    const url = window.URL.createObjectURL(blob)
+
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'selected_data.csv'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
   }
 
   return (
@@ -155,7 +195,7 @@ const App = () => {
         <h1>Hi, {isLoggedIn ? user : 'Guest'}</h1>
         <h2>Report</h2>
         <div className='navbar'>
-          <div>
+          <div className='navbar-left'>
             <SearchBar
               onSearch={handleSearch}
               searchTags={searchTags}
@@ -163,6 +203,21 @@ const App = () => {
                 handleRemoveSearchTag(index)
               }
             />
+            <button className='export-btn' onClick={handleExportToCSV}>
+              <svg
+                width='20'
+                height='20'
+                viewBox='0 0 20 20'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  d='M10.8327 8.33333H14.9993L9.99935 13.3333L4.99935 8.33333H9.16602V2.5H10.8327V8.33333ZM3.33268 15.8333H16.666V10H18.3327V16.6667C18.3327 17.1269 17.9596 17.5 17.4993 17.5H2.49935C2.03912 17.5 1.66602 17.1269 1.66602 16.6667V10H3.33268V15.8333Z'
+                  fill='#535557'
+                />
+              </svg>
+              Download Report
+            </button>
           </div>
           <div>
             <ColumnToggler
@@ -203,11 +258,7 @@ const App = () => {
             className='page-btn'
           >
             <g id='Frame'>
-              <path
-                id='Vector'
-                d='M8 12L14 6V18L8 12Z'
-                fill='#151718'
-              />
+              <path id='Vector' d='M8 12L14 6V18L8 12Z' fill='#151718' />
             </g>
           </svg>
           <span>Prev</span>
@@ -231,11 +282,7 @@ const App = () => {
             xmlns='http://www.w3.org/2000/svg'
           >
             <g id='Frame'>
-              <path
-                id='Vector'
-                d='M8 12L14 6V18L8 12Z'
-                fill='#151718'
-              />
+              <path id='Vector' d='M8 12L14 6V18L8 12Z' fill='#151718' />
             </g>
           </svg>
         </button>

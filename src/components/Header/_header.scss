@@ -1,0 +1,33 @@
+.ccare__header-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  @include flex(row);
+  @include align-justify(center, space-between);
+  padding: cc-rem(24px);
+  background: transparent;
+
+  &.logged-in {
+    background: $gray-100;
+  }
+
+  @include breakpoint($desktop) {
+    padding-inline: cc-rem(40px);
+  }
+
+  .ccare__header-logo {
+    display: flex;
+  }
+
+  .ccare__header-left {
+    @include flex(row);
+    @include align-justify(center, flex-start);
+    gap: cc-rem(32px);
+  }
+}
+
+.ccare__header-report-select {
+  all: initial;
+}

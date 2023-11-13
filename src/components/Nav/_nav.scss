@@ -1,0 +1,57 @@
+.ccare__nav-menu {
+  position: relative;
+
+  @include breakpoint($desktop) {
+    @include flex(row);
+    @include align-justify(center, flex-end);
+    gap: cc-rem(30px);
+  }
+}
+
+.ccare__navlink {
+  @include hover($gray-400);
+}
+
+.ccare__nav-usermenu-btn {
+  @include flex(row);
+  gap: cc-rem(4px);
+  position: relative;
+  cursor: pointer;
+
+  .ccare__nav-usermenu-btn-text {
+    @include button-text;
+    position: relative;
+  }
+}
+
+.ccare__nav-usermenu {
+  position: absolute;
+  padding: cc-rem(20px) 0 cc-rem(20px);
+}
+
+.ccare__nav-usermenu:hover .ccare__nav-usermenu-items,
+.ccare__nav-usermenu-btn[aria-expanded='true'] + .ccare__nav-usermenu-items {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ccare__nav-usermenu-items {
+  @include floating-menu;
+  position: absolute;
+  width: cc-rem(169px);
+  top: cc-rem(50px);
+  right: 0;
+
+  a {
+    padding: cc-rem(12px) cc-rem(16px);
+    line-height: 1;
+    @include hover($gray-400);
+  }
+}
+
+.ccare__nav-hamburger {
+  @include breakpoint($desktop) {
+    display: none;
+    @include hover($gray-400);
+  }
+}
